@@ -1,7 +1,4 @@
-# Bugfish — D'Agapeyeff Cipher Investigation
-
-> [!TIP]
-> No new features are currently planned for this project. However, users are welcome to create issues or feature requests, which will be reviewed and responded to within 1–3 weeks.
+# D'Agapeyeff Cipher Investigation
 
 ## 🔍 Overview
 
