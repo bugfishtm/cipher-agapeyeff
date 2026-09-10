@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What to do next &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="08-next.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[08] What to do next</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[08]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>What to do next</h1>
+  <p class="lede">Ranked by expected value, not by how interesting it sounds.</p>
+</div></div>
+<div class="wrap">
+<div class="panel">
+      <h3>Still open <span class="dim">&mdash; ranked by expected value</span></h3>
+      <div class="scroll"><table>
+        <tr><th>#</th><th>attack</th><th>why it is worth doing</th><th>cost</th></tr>
+        <tr>
+          <td class="n">1</td>
+          <td><b>A non-English plaintext</b></td>
+          <td>Every scorer used in this investigation is English. D'Agapeyeff was of Russian parentage and
+          quotes French cryptograms throughout the book. The solver takes its corpus from a file: swap
+          <code>corpus.txt</code> for French, Latin or transliterated Russian and rerun everything. Cheapest
+          untried idea on the list by a wide margin.</td>
+          <td>hours</td>
+        </tr>
+        <tr>
+          <td class="n">2</td>
+          <td><b>Key phrases, not key words</b></td>
+          <td>6,616 single words and dates have been tried. A phrase has not &mdash; nor has a sentence cut in
+          proof and therefore absent from the printed book, which is exactly the failure mode Section 07
+          describes. Generate every n-gram of the book's sentences up to length 20 and use each as a key.</td>
+          <td>days</td>
+        </tr>
+        <tr>
+          <td class="n">3</td>
+          <td><b>A syllabary under the transposition</b></td>
+          <td>Ruled out as a solution on its own, not as the layer beneath. Needs an n-gram model over
+          syllables rather than letters, which nothing in this project has.</td>
+          <td>weeks</td>
+        </tr>
+        <tr>
+          <td class="n">4</td>
+          <td><b>Double transposition, two realistic keys</b></td>
+          <td>Two independent ten-letter keys is 1.3&nbsp;&times;&nbsp;10<sup>13</sup> combinations, about
+          eleven years of one desktop. Two twelve-letter keys is 2.3&nbsp;&times;&nbsp;10<sup>17</sup>. Not a
+          waiting problem, and with crib dragging now closed there is nothing left to make it tractable.</td>
+          <td>years</td>
+        </tr>
+      </table></div>
+    </div>
+
+    <div class="panel">
+      <h3>Closed <span class="dim">&mdash; run, and negative</span></h3>
+      <div class="scroll"><table>
+        <tr><th>was #</th><th>attack</th><th>what came back</th><th>best</th></tr>
+        <tr>
+          <td class="n">1</td>
+          <td><b>Score only the opening</b></td>
+          <td>The highest-value idea on the original list, and the one most likely to have recovered a message
+          broken part-way through. Four-gram score over the first 24 to 196 letters at every width. No width
+          holds a plateau; at N=24 the fits <em>beat</em> real English, which is overfitting rather than
+          signal. There is no cliff because there is no plateau.</td>
+          <td class="n">see 04</td>
+        </tr>
+        <tr>
+          <td class="n">2</td>
+          <td><b>Double transposition, all four directions</b></td>
+          <td>The 2017 lead's own prediction. UU, UA, AU and AA at every width pair from 2 to 7 &mdash;
+          <b>139,806,976 key pairs</b> across 144 combinations. The three directions nobody had searched are no
+          better than the one that had been.</td>
+          <td class="n">&minus;1.34</td>
+        </tr>
+        <tr>
+          <td class="n">1</td>
+          <td><b>Crib dragging</b></td>
+          <td>Built, validated, and negative. A crib's letter-repetition pattern is a hard structural
+          constraint &mdash; checkable without the substitution, impossible to overfit &mdash; which is why it
+          was worth building after the head-scored sweep failed for the opposite reason. On a control it
+          returns the true plaintext ranked first at &minus;0.7914 with the runner-up 0.52 behind. On the real
+          cipher: 1,495,884 placements, 143,948 pattern-consistent, and the top fifteen span a band 0.021
+          wide. When the answer is there it separates. Nothing separates.</td>
+          <td class="n">&minus;1.41</td>
+        </tr>
+        <tr>
+          <td class="n">3</td>
+          <td>The midpoint split</td>
+          <td>Each half swept alone, halves swapped, each half reversed, the anomalous unit deleted.</td>
+          <td class="n">&minus;1.15</td>
+        </tr>
+        <tr>
+          <td class="n">4</td>
+          <td>Other unit counts</td>
+          <td>192 to 197 units, in case the tail is not three nulls or a group was lost from the end.</td>
+          <td class="n">&minus;1.32</td>
+        </tr>
+        <tr>
+          <td class="n">8</td>
+          <td>Wide keys that divide 392</td>
+          <td>Widths 28, 49 and 56, where the rectangle is complete and only one long-column pattern exists.
+          Width 49 returns the highest raw number anywhere in this investigation, &minus;1.19 &mdash; and it
+          means nothing, because at width 49 each column holds four units and ordering 49 fragments will fit
+          almost anything.</td>
+          <td class="n">&minus;1.19</td>
+        </tr>
+      </table></div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h3>Where that leaves it</h3>
+      <p>The two ideas with the strongest theoretical backing &mdash; scoring only the opening, and the
+      four-direction double transposition the 2017 finding predicts &mdash; have both now been run, and both
+      came back empty. That matters more than another negative usually would, because between them they were
+      the two ways this message was most likely to still be recoverable by searching.</p>
+      <p>What survives is narrower and less comfortable. Either the plaintext is not English, or the key is a
+      phrase rather than a word, or the encipherment is internally inconsistent in a way no key can undo. The
+      first two are cheap and remain untested. The third cannot be tested at all &mdash; only outlived.</p>
+      <p>Crib dragging was the last idea with real structural leverage, and it has now been built, proved on
+      a control, and run. It is negative. That closes the recommendation this page made one revision ago, and
+      it should be said plainly: there is no longer a search-shaped idea on the table with a strong prior
+      behind it.</p>
+      <p>What remains is cheap and speculative rather than expensive and promising. Swap the corpus for
+      French or Russian &mdash; a five-minute change nobody has made. Try key <em>phrases</em> instead of key
+      words. Build a syllable model. None of these carry the weight that scoring the opening or crib dragging
+      did, and all three could be wrong without telling us anything.</p>
+      <p>The honest reading is the one Section 05 keeps arriving at and the published record already reached:
+      the message is most likely <b>not internally consistent</b>, because the man who made it could not sort
+      a nine-letter keyword correctly in print. If that is true, no search will ever find it &mdash; and the
+      pattern of these results, where every method that provably works on a control returns a flat band of
+      noise here, is what that looks like from the outside.</p>
+    </div>
+  </div>
+<div class="pagenav"><a href="07-record.html"><span class="lbl">&larr; 07</span>The published record</a><a href="09-assessment.html" style="text-align:right"><span class="lbl">09 &rarr;</span>How it could be cracked</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

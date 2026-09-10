@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What went wrong &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="05-what-went-wrong.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[05] What went wrong</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+<ul class="navsub">
+<li><a href="#w-print">printing</a></li>
+<li><a href="#w-hand">the desk</a></li>
+<li><a href="#w-key">the key</a></li>
+<li><a href="#w-verdict">which one</a></li>
+</ul>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[05]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>What went wrong</h1>
+  <p class="lede">The cipher was set for a reader with a pencil. Start there and the problem changes shape.</p>
+</div></div>
+<div class="wrap">
+<div class="panel">
+      <p>D'Agapeyeff tells his reader to arm
+      himself with "squared paper, tracing paper, a graduated ruler", counters with letters printed on them,
+      and coloured pencils. He then works three cryptograms by hand in front of you, and the hardest of them
+      &mdash; a Vigen&egrave;re with an unknown key &mdash; he cracks in five pages. The challenge on page 159
+      is offered in the same voice: <em>test your skill</em>. Not <em>here is something nobody can read</em>.</p>
+      <p>So the intended cipher was almost
+      certainly simple: a keyword square turning letters into two-digit coordinates, then a columnar
+      transposition with a keyword. That is the exact combination he teaches on pages 117&ndash;125. A patient
+      reader with squared paper could get it.</p>
+      <p>Eighty-seven years and 82 million machine-tested
+      keys later, it has not been got. When an easy cipher cannot be solved, the interesting question is not
+      "what exotic system is this" but <b>"what broke"</b>. Below is every way it could have broken, and what
+      the measurements say about each.</p>
+    </div>
+
+    <h3 class="grouphd" style="margin:26px 0 10px" id="w-print">Errors in the printing</h3>
+    <div class="panel">
+
+      <div class="ev">
+        <div class="k">P1</div>
+        <div>
+          <h4>A single mis-set digit <span class="pill ko">ruled out as the cause</span></h4>
+          <p>One is visible &mdash; the zero at digit 195 &mdash; and there could be more that are invisible,
+          because a 6 set as an 8, or a 2 as a 4, breaks no rule. There are roughly
+          <span class="num">1,400</span> such undetectable single-digit slips available.</p>
+          <p>But it cannot matter. One wrong digit corrupts one unit out of 196. Under a substitution that is
+          one wrong letter; under a transposition it is still one wrong letter, just somewhere else. The
+          four-gram score of a 196-letter message barely notices. And it was tested directly: setting digit 195
+          to 6, 7, 8 and 9 in turn and rerunning the entire width sweep each time moved the best score from
+          &minus;1.35 to &minus;1.33. Nothing.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">P2</div>
+        <div>
+          <h4>A dropped or inserted digit <span class="pill ko">impossible</span></h4>
+          <p>Lose one digit and every digit after it lands in the wrong half of its pair: row digits start
+          appearing in column positions and the 6789&thinsp;/&thinsp;12345 alternation collapses from that point to the
+          end of the message. The alternation is perfect across all 392 working digits.</p>
+          <p>So nothing was dropped and nothing was added, anywhere in the body of the text. This is one of the
+          few things about this cipher that can be stated flatly.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">P3</div>
+        <div>
+          <h4>Lines or groups printed in the wrong order <span class="pill ko">ruled out by E8</span></h4>
+          <p>This was the most attractive of the printing hypotheses. The cryptogram is set as eight lines of
+          ten groups; each line is fifty digits, an <em>even</em> number, so swapping two lines preserves the
+          alternation perfectly and leaves no visible trace. A typesetter reordering two lines of a
+          meaningless-looking digit block is entirely plausible.</p>
+          <p>E8 kills it. Swapping printed lines moves blocks of 25 units, and a block move leaves every
+          n-gram inside the block intact: real English cut into 25-unit blocks and shuffled still shows about
+          <span class="num">18.5</span> recurring triples. Reordering the five-digit groups still shows
+          <span class="num">13.1</span>. The cipher shows <span class="num">5</span>, which is what you get
+          only when every unit has moved independently.</p>
+          <p>Whatever scrambled this message did it one unit at a time. No printing accident does that.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">P4</div>
+        <div>
+          <h4>A group missing from the end <span class="pill open">cannot be excluded</span></h4>
+          <p>Seven lines of ten groups and a last line of nine. Eighty groups would have been the natural
+          count, and 400 digits would be 200 units. If the compositor lost the final group, the parity test
+          would never notice &mdash; loss at the very end costs nothing downstream.</p>
+          <p>It would cost two or three units of plaintext, which is survivable, and it would change the
+          arithmetic of every transposition: 200 units instead of 196 gives different column lengths at every
+          width. That is a real gap in the search, and a cheap one to close for anyone who wants to: rerun the
+          width sweep assuming 197, 198, 199 and 200 units with the tail unknown.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="grouphd" style="margin:26px 0 10px" id="w-hand">Errors at the desk</h3>
+    <div class="panel">
+
+      <div class="ev">
+        <div class="k">H1</div>
+        <div>
+          <h4>The short cells put in the wrong columns <span class="pill open">tested</span></h4>
+          <p>196 units do not fill a rectangle evenly at most widths. At width 13 the last row holds two units;
+          at width 11 it holds seven. The convention is that the long columns are the leftmost ones, and every
+          serious attack assumes it &mdash; including, until now, this one. By hand, on squared paper, getting
+          that wrong is the easiest mistake in the whole procedure, and the resulting ciphertext is not a valid
+          columnar transposition of anything.</p>
+          <p>The attack was rerun with the constraint dropped, so that any column may be the long one, at
+          every width from 2 to 13. Best score <span class="num">&minus;1.34</span>, at width 12 &mdash; which
+          is what this machinery returns from noise. Not this either.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">H2</div>
+        <div>
+          <h4>A letter skipped or doubled while filling the rectangle <span class="pill open">the strongest candidate</span></h4>
+          <p>This is the one that hurts, and it is the one no search can undo.</p>
+          <p>Write the plaintext across a keyed rectangle, twelve columns wide, and drop a letter at position
+          forty. Everything after that point shifts one place left. Every subsequent letter is now in the wrong
+          column, and no key on earth reads it back out correctly. The first thirty-nine letters are fine; the
+          remaining hundred and fifty are permanently scrambled by a transposition that never existed.</p>
+          <p>And the message that results looks <em>exactly</em> like what we have. Frequencies preserved
+          (E6). Order destroyed one unit at a time (E7, E8). Alternation intact, because the slip happened
+          before the digits were written down. It would defeat the reader, and &mdash; this is the part that
+          fits &mdash; it would defeat the author too, which is why the answer was never published and the
+          challenge was quietly dropped from the reprint.</p>
+          <p>Nothing in the measurements distinguishes this from a correct transposition with a key too long to
+          find. That is uncomfortable, and it is the honest position.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">H3</div>
+        <div>
+          <h4>A column read in the wrong direction, or the square misread <span class="pill open">partly covered</span></h4>
+          <p>Reading one column upwards instead of downwards reverses a run of fifteen or so units in place.
+          Looking a letter up in the row above the right one, for part of a message, corrupts a scattered
+          handful. Both are ordinary hand errors; the first is partly covered by the boustrophedon routes in
+          the geometry sweep, the second is cheap enough not to matter.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">H4</div>
+        <div>
+          <h4>The keyword numbered wrongly <span class="pill ko">harmless</span></h4>
+          <p>Miscount the alphabetical rank of the keyword's letters and you get a different column order
+          &mdash; but still a valid one. Every column order at every width from 2 to 15 has been searched to
+          optimality, so a mis-numbered key is already inside the search space. This cannot be the problem.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="grouphd" style="margin:26px 0 10px" id="w-key">The key that moved</h3>
+    <div class="panel">
+
+      <div class="ev">
+        <div class="k">K1</div>
+        <div>
+          <h4>The key came from the book, and the book changed <span class="pill open">tested, and worth more</span></h4>
+          <p>He was writing the last page of a book that then went through proofs. A key taken from his own
+          text &mdash; a phrase from a paragraph, a page number, the date he wrote it &mdash; could be true
+          when he enciphered and false by the time it was printed. Page numbers shift. Sentences get cut.</p>
+          <p>Tested: every word of three letters or more that appears anywhere in <em>Codes and Ciphers</em>
+          &mdash; 5,484 of them &mdash; used as a transposition key, numbered by alphabetical rank exactly as he
+          does on page 117, read four ways each. Plus every date in 1939 in three formats, because page 127
+          suggests precisely that: "instead of Manchester as keyword you can simply use the current dates, as
+          for instance 2. 5. 1939."</p>
+          <p>26,140 trials. Best score <span class="num">&minus;1.42</span>, on the word REES. Nothing.</p>
+          <p>What that does <em>not</em> cover is a key <em>phrase</em> rather than a single word, or a key
+          drawn from a passage that was cut before publication and is therefore not in the book we have. Both
+          remain open, and the second is exactly the failure mode this heading is about.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">K2</div>
+        <div>
+          <h4>A dictionary code keyed to his own pagination <span class="pill ko">ruled out in its direct form</span></h4>
+          <p>He gives two full pages to this idea (129&ndash;130): number each word by page and position, send
+          the numbers, optionally encipher them again. If the plaintext under the square were page-and-word
+          references into his own book, and the pagination moved in proof, the message would be irrecoverable
+          <em>to him as well</em> &mdash; which fits the story better than almost anything.</p>
+          <p>It does not survive contact with the text. E1 shows the five-digit groups are not the units, and a
+          two-digit unit cannot address a page. What does survive is the shape of the idea: he writes on page
+          128 that "an enciphered code of this kind should be very difficult to break", and a code layer
+          underneath the square would leave a plaintext with no English statistics at all.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">K3</div>
+        <div>
+          <h4>Fixed-length code groups underneath <span class="pill ko">ruled out</span></h4>
+          <p>If the plaintext were five-letter commercial code words &mdash; the kind Chapter IV is entirely
+          about, built with a deliberate two-letter difference between any two words, which is a design that
+          suppresses repetition by construction &mdash; then units at the same position within each group would
+          share a template and stand out.</p>
+          <p>Measured at every period from 2 to 8. Every coset's index of coincidence sits within noise of a
+          shuffled control: at period 5 the cosets run 0.073, 0.062, 0.072, 0.081, 0.067 against a shuffled
+          control mean of 0.073. There is no periodic structure in this message at any period.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="grouphd" style="margin:26px 0 10px" id="w-verdict">Which one it probably was</h3>
+    <div class="panel">
+      <p>Ranked by how well each survives the
+      measurements, and by what it would take to confirm:</p>
+      <div class="scroll"><table style="width:100%">
+        <tr><th >Cause</th><th >Fits the evidence</th><th >How you would ever know</th></tr>
+        <tr>
+          <td ><b>H2</b> &mdash; a letter skipped while filling the rectangle</td>
+          <td >completely, including the author's own failure to reproduce it</td>
+          <td >search for a key that reads correctly up to some position and then stops. A partial solve of the first thirty or forty letters is the signature</td>
+        </tr>
+        <tr>
+          <td ><b>K1</b> &mdash; a key he could not reconstruct</td>
+          <td >well; explains the withdrawal from the 1952 reprint</td>
+          <td >a key phrase rather than a key word; or a crib</td>
+        </tr>
+        <tr>
+          <td >A long or double key, correctly executed</td>
+          <td >completely, but then it was never solvable by hand and he mis-set the difficulty</td>
+          <td >out of reach by search &mdash; two ten-letter keys is eleven years of this machine, two twelve-letter keys is longer than the universe has had</td>
+        </tr>
+        <tr>
+          <td ><b>P4</b> &mdash; a group lost from the end</td>
+          <td >possible, and cheap to test</td>
+          <td >rerun the sweep at 197&ndash;200 units</td>
+        </tr>
+        <tr>
+          <td ><b>P1&ndash;P3</b> &mdash; printing errors in the body</td>
+          <td >badly; E8 excludes the block ones and single digits are too cheap to matter</td>
+          <td >already excluded</td>
+        </tr>
+      </table></div>
+      <p class="hint" style="margin-top:14px">The uncomfortable reading, and the one this page ends up
+      endorsing: <b>the message may not be internally consistent</b>. Not corrupt in the sense of a misprint,
+      but corrupt in the sense that the author's own hand slipped somewhere in the middle of a procedure he
+      then could not retrace. Everything measured here is compatible with that, and nothing measured here can
+      distinguish it from a correct cipher with a key beyond reach. If it is true, no amount of searching will
+      find the message, only the first fragment of it &mdash; and that fragment is what a solver should now be
+      hunting for.</p>
+    </div>
+  </div>
+<div class="pagenav"><a href="04-attacks.html"><span class="lbl">&larr; 04</span>What has been tried</a><a href="06-verdict.html" style="text-align:right"><span class="lbl">06 &rarr;</span>What cipher is it</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it could be cracked &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="09-assessment.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[09] How it could be cracked</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+<ul class="navsub">
+<li><a href="#unicity">the unicity argument</a></li>
+<li><a href="#flaw">the shared flaw</a></li>
+<li><a href="#fix">the fix</a></li>
+<li><a href="#grille">turning grille</a></li>
+<li><a href="#odds">honest odds</a></li>
+</ul>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[09]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>How it could be cracked</h1>
+  <p class="lede">A strategic assessment: why 222 million rejections are informative, the flaw shared by all of them, and the one objective that has never been tried.</p>
+</div></div>
+<div class="wrap">
+<div class="panel">
+      <h3 id="unicity">The argument from unicity <span class="dim">&mdash; why failure is informative</span></h3>
+      <div class="tight">
+      <p>Before asking how to crack it, ask whether it is crackable in principle. A keyword-filled square
+      costs perhaps 20&ndash;40 bits of real key (it is a dictionary word, not a random permutation of 25
+      letters). A columnar key of width 12 adds log&#8322;(12!) &asymp; 29 bits. Call the whole thing
+      <span class="num">50&ndash;70 bits</span>.</p>
+      <p>English carries about 3.2 bits of redundancy per letter, so 196 letters carry roughly
+      <span class="num">627 bits</span> of it. Unicity distance &mdash; the length past which only one key
+      can produce sensible plaintext &mdash; is around <span class="num">22 letters</span>. We have 196.</p>
+      <p><b>So a correct solution, if one exists, is uniquely identifiable nine times over.</b> There is no
+      hiding place where several keys all produce plausible English. Which means the 222 million rejections
+      are not bad luck or insufficient compute. If the answer were inside the space searched, it would have
+      stood up and separated, the way it does on every control. One of the assumptions underneath the search
+      must be wrong.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 id="flaw">The flaw shared by all 222 million attempts</h3>
+      <div class="tight">
+      <p>Every attack in Section 04 &mdash; without exception &mdash; had to <em>guess a substitution in order
+      to score a key</em>. Undo a transposition and you hold 196 meaningless two-digit units; to ask "is this
+      English?" you must first decide which letter each unit stands for. That single requirement did two kinds
+      of damage.</p>
+      <p><b>It made every candidate expensive.</b> A hill-climb over 18 symbols costs a millisecond or two.
+      Multiply by a key space and the ceiling arrives fast: two seven-letter keys was as far as double
+      transposition could reach.</p>
+      <p><b>And it welded the search to English.</b> Every score came from a 147,626-letter English corpus. A
+      French, Latin or Russian plaintext would have been rejected at every step, silently, by machinery that
+      could not see it.</p>
+      <p>Both problems have the same root, and both have the same fix.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 id="fix">The fix &mdash; score without the substitution, and without the language</h3>
+      <div class="tight">
+      <p>E7 established that the count of recurring n-grams is invariant under <em>any</em> one-to-one
+      substitution. That was used there as a negative &mdash; to prove no substitution could explain the
+      cipher. Turned around, it is the objective this investigation has been missing.</p>
+      <p>Undo a candidate transposition and simply <b>count how often the unit sequence repeats itself</b>.
+      Pairs, triples, quads. No substitution required, because the count does not depend on one. No language
+      model required, because <em>every</em> natural language repeats itself and random orderings do not. A
+      correct key restores the repeats; a wrong key does not.</p>
+      <p>Measured on controls &mdash; English through a square and a real columnar key, 40 trials per width,
+      3,000 random keys compared against the true one each time:</p>
+      </div>
+      <div class="scroll"><table>
+        <tr><th>width</th><th class="n">true key</th><th class="n">random keys</th><th class="n">separation</th><th class="n">random keys beating it</th></tr>
+        <tr><td class="mono">9</td><td class="n">191.7</td><td class="n">64.0 &plusmn; 13.4</td><td class="n">9.5 &sigma;</td><td class="n">1.48%</td></tr>
+        <tr><td class="mono">11</td><td class="n">198.1</td><td class="n">60.1 &plusmn; 11.7</td><td class="n">11.7 &sigma;</td><td class="n">0.29%</td></tr>
+        <tr><td class="mono">13</td><td class="n">210.7</td><td class="n">62.4 &plusmn; 12.4</td><td class="n">11.7 &sigma;</td><td class="n">0.49%</td></tr>
+      </table></div>
+      <p class="hint" style="margin-top:10px">Nine to twelve sigma. The true key is not merely detectable, it
+      is unmistakable &mdash; and it was detected without anyone deciding what a single unit means.</p>
+    </div>
+
+    <div class="panel">
+      <h3>What that unlocks</h3>
+      <p class="hint" style="margin-bottom:10px">A candidate now costs about ten microseconds instead of two
+      milliseconds, and the score is deterministic so no restarts are needed. On sixteen cores:</p>
+      <div class="scroll"><table>
+        <tr><th>exhaustive search</th><th class="n">candidates</th><th class="n">old way</th><th class="n">new way</th></tr>
+        <tr><td>single columnar, every key at w=12</td><td class="n">479,001,600</td><td class="n">16.6 h</td><td class="n">5 min</td></tr>
+        <tr><td>single columnar, every key at w=13</td><td class="n">6,227,020,800</td><td class="n">9 d</td><td class="n">1.1 h</td></tr>
+        <tr><td>single columnar, every key at w=14</td><td class="n">87,178,291,200</td><td class="n">0.3 y</td><td class="n">15 h</td></tr>
+        <tr><td>single columnar, every key at w=15</td><td class="n">1,307,674,368,000</td><td class="n">5.2 y</td><td class="n">9.5 d</td></tr>
+        <tr><td>double, two keys both &le; 8</td><td class="n">1,625,702,400</td><td class="n">56 h</td><td class="n">17 min</td></tr>
+        <tr><td>double, two keys both &le; 9</td><td class="n">131,681,894,400</td><td class="n">0.5 y</td><td class="n">23 h</td></tr>
+        <tr><td>double, two keys both &le; 10</td><td class="n">13,168,189,440,000</td><td class="n">52 y</td><td class="n">0.3 y</td></tr>
+      </table></div>
+      <div class="tight" style="margin-top:12px">
+      <p><b>The double-transposition barrier moves out by two full key letters</b> &mdash; from two seven-letter
+      keys to two nine-letter keys for the same effort, and two ten-letter keys become a four-month run rather
+      than a fifty-year one. That is the single largest gain available, and it lands squarely on the family the
+      2017 finding points at.</p>
+      <p>It also makes the single columnar searches <em>genuinely exhaustive</em> for the first time. The
+      dynamic program in Section 04 is exact only <em>given a substitution</em>; it was iterated from seeds, so
+      gaps were possible. Enumerating every key at w&nbsp;&le;&nbsp;13 leaves none.</p>
+      <p>And it tests every language at once, for free. If the plaintext is French or Russian, this objective
+      finds the key anyway &mdash; the identification of the language comes afterwards, from the recovered
+      order, not before.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 id="grille">The untested cipher family <span class="dim">&mdash; a turning grille</span></h3>
+      <div class="tight">
+      <p>Everything tried has been columnar, or a fixed geometric route, or two of those in series. One
+      classical family has never been touched, and the arithmetic is uncomfortable.</p>
+      <p>A turning grille is a square card with holes, laid over a grid, written through, then rotated ninety
+      degrees and written through again, four times in all. On a <b>14&nbsp;&times;&nbsp;14</b> board a valid
+      grille has exactly <b>49 holes</b>, and four rotations write exactly <b>196</b> letters. Not
+      approximately. Exactly.</p>
+      <p>The fit goes further. A turning grille reorders <em>every letter independently</em> &mdash; which is
+      precisely the fingerprint E8 measured and could not account for with any columnar arrangement. And
+      d'Agapeyeff knew grilles: he devotes pages 113&ndash;115 to one, telling a long story about a Russian
+      professor breaking a grille message in the Baltic states after 1918.</p>
+      <p><b>The argument against:</b> the grille he describes is Cardan's &mdash; steganography, hiding words in
+      an innocent letter &mdash; not a turning grille used as a transposition. He never teaches the turning
+      variety. So this would be him reaching past his own book, which he does not obviously do elsewhere.</p>
+      <p><b>Why it is still worth doing:</b> a grille is 49 independent four-way choices, about 98 bits, which
+      is under the unicity bound and therefore recoverable in principle. And it decomposes: each orbit of four
+      cells can be scored almost independently, so hill-climbing with the repeat objective is tractable where
+      brute force (4<sup>49</sup>) never would be. Nobody has tried it. It is the largest genuinely unexplored
+      hypothesis on the board.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>The path that is not a search at all</h3>
+      <div class="tight">
+      <p>Two published analyses are cited everywhere and have been read by nobody in this investigation, this
+      page included. <b>David Shulman</b> in <i>The Cryptogram</i>, April/May 1952 and March/April 1959; and
+      <b>Wayne G. Barker</b> in <i>Cryptologia</i>, 1978. They are quoted only at second hand, from
+      bibliographies.</p>
+      <p>Shulman's first article appeared in <em>1952</em> &mdash; the same year the challenge was quietly cut
+      from the reprint. That is either coincidence or it is the whole story, and the article would say which.
+      An American Cryptogram Association member can pull both from the archive in an afternoon.</p>
+      <p>Beyond that: Oxford University Press production files for the 1939 Meridian series would show what
+      changed between proof and print, which is where a shifting key would leave its fingerprint.
+      D'Agapeyeff's own papers &mdash; he was a working cartographer with an institutional life &mdash; may
+      survive somewhere. Any of these could contain the answer outright, and all of them are cheaper than
+      another hundred million keys.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 id="odds">Honest odds</h3>
+      <div class="scroll"><table>
+        <tr><th>route</th><th class="n">chance it cracks it</th><th>reasoning</th></tr>
+        <tr>
+          <td><b>Exhaustive single columnar, repeat objective, w&le;14</b></td>
+          <td class="n">~10%</td>
+          <td>Closes the gaps the seeded dynamic program may have left, and tests every language at once.
+          Low odds only because this family has already been hammered hardest.</td>
+        </tr>
+        <tr>
+          <td><b>Double transposition, two keys &le; 9&ndash;10</b></td>
+          <td class="n">~20%</td>
+          <td>The family the 2017 finding points at, now reachable. The best-motivated hypothesis meeting the
+          first method that can actually search it.</td>
+        </tr>
+        <tr>
+          <td><b>Turning grille</b></td>
+          <td class="n">~10%</td>
+          <td>196 = 4 &times; 49 is a hard structural coincidence and the reordering signature matches exactly.
+          Discounted because it is outside what the book teaches.</td>
+        </tr>
+        <tr>
+          <td><b>Non-English plaintext</b></td>
+          <td class="n">~10%</td>
+          <td>Comes free with the new objective rather than as a separate effort. Real but modest prior.</td>
+        </tr>
+        <tr>
+          <td><b>Archival &mdash; Shulman, Barker, OUP files</b></td>
+          <td class="n">~15%</td>
+          <td>The only route that could produce a definitive answer rather than a candidate, and the only one
+          that costs no compute at all.</td>
+        </tr>
+        <tr>
+          <td><b>Nothing works, because the message is broken</b></td>
+          <td class="n">~40%</td>
+          <td>The published consensus, the conclusion of Section 05, and the reading most consistent with nine
+          separate methods that provably solve controls all returning flat noise here.</td>
+        </tr>
+      </table></div>
+      <p class="hint" style="margin-top:12px">Those do not sum to 100 because they are not exclusive &mdash;
+      the last line is the background against which the others are bets. Taken together: roughly a
+      <b>50&ndash;60% chance this cipher is recoverable at all</b>, and if it is, the combination most likely to
+      do it is <b>the repeat objective pointed at double transposition</b>. That is one program, a few days of
+      compute, and it has never been run.</p>
+    </div>
+
+    <div class="panel">
+      <h3>If I had one week and this machine</h3>
+      <div class="tight">
+      <p><b>Day 1.</b> Build the repeat objective into the solver as a first-class scorer. It is perhaps eighty
+      lines. Re-run every single columnar width exhaustively to w=13 as a regression test &mdash; it should
+      reproduce every negative in Section 04, and if it does not, something in this investigation is wrong and
+      that matters more than the cipher.</p>
+      <p><b>Days 2&ndash;3.</b> Double transposition, both keys to width 9, exhaustive. 132 billion pairs, about
+      a day. This is the run that has the best claim on being the one that works.</p>
+      <p><b>Day 4.</b> Turning grille. Hill-climb 49 orbits under the repeat objective, many restarts. Cheap,
+      unexplored, and structurally motivated by 196 = 4 &times; 49.</p>
+      <p><b>Days 5&ndash;7.</b> Two keys to width 10 in the background while writing to the ACA for the Shulman
+      articles. The letter costs nothing and might end the whole thing.</p>
+      <p>And if all of that comes back flat: that is a result too. It would make the broken-message reading
+      close to the only one standing, and this page should say so rather than keep proposing searches.</p>
+      </div>
+    </div>
+
+  </div>
+<div class="pagenav"><a href="08-next.html"><span class="lbl">&larr; 08</span>What to do next</a><a href="10-book.html" style="text-align:right"><span class="lbl">10 &rarr;</span>The book&#x27;s toolkit</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

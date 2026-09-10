@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What has been tried &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="04-attacks.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[04] What has been tried</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+<ul class="navsub">
+<li><a href="#how">method</a></li>
+<li><a href="#control">the control</a></li>
+<li><a href="#results">results</a></li>
+<li><a href="#raw">raw output</a></li>
+</ul>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[04]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>What has been tried</h1>
+  <p class="lede">Every attack run against this cipher, the control that proves each one works, and the raw output.</p>
+</div></div>
+<div class="wrap">
+<div class="panel" id="how">
+      <h3>How the search works</h3>
+      <p>Substitution and transposition cannot be
+      attacked separately &mdash; a wrong column order makes every substitution look like noise and a wrong
+      substitution makes every column order look like noise. Simulated annealing over both at once fails at this
+      message length; it was tried and it does not converge.</p>
+      <p>What works is exploiting the one thing a
+      transposition cannot hide. Symbol frequencies survive it untouched, so ranking the 18 units against
+      English letter frequencies gives a substitution that is roughly right. With that in hand the column
+      order can be solved <em>exactly</em> &mdash; Held-Karp dynamic programming over subsets, scoring each
+      candidate pairing of adjacent columns by the bigram statistics of the letters that would sit side by
+      side. The recovered order gives a text; the text refines the substitution; the refined substitution
+      gives a better order. Two or three rounds and it converges.</p>
+      <p>Scores are mean log&#8321;&#8320;
+      probability per letter under an interpolated four-gram model built from 147,626 letters of 1939 British
+      prose &mdash; the book's own text, which is the right register. Real English scores
+      <span class="num">&minus;0.74</span>; the same text shuffled scores <span class="num">&minus;1.89</span>;
+      uniform random letters score <span class="num">&minus;2.36</span>.</p>
+      <p>The transposition convention itself was checked
+      against the author. Feeding the code d'Agapeyeff's own worked example from page 118 &mdash; keyword
+      MANCHESTR over ENEMY ATTACKS AT DAWN &mdash; reproduces his key numbering
+      <span class="num">5 1 6 2 4 3 8 9 7</span> and his ciphertext
+      <span class="num">NKMAADYTECESANTATW</span> exactly. His "Chinese manner" route on page 126 reproduces
+      too, letter for letter. Whatever else is wrong, the machinery does transposition the way he did.</p>
+    </div>
+
+    <div class="panel" style="margin-top:16px" id="control">
+      <h3>The control &mdash; proof the attack works, and where it stops working</h3>
+      <p>196 letters of English, a MANCHESTER
+      square, a random columnar key. The solver is given the digits and nothing else, and has to recover both
+      the key and the alphabet.</p>
+      <div class="scroll"><table style="width:100%">
+        <tr><th >Width</th><th>Seeds</th><th>Score</th><th>Letters correct</th><th >Result</th></tr>
+        <tr><td class="mono">2 &ndash; 12</td><td class="mono">250</td><td class="mono">&minus;0.7914</td><td class="mono">196 / 196</td><td ><span class="pill ok">solved at every width</span></td></tr>
+        <tr><td class="mono">13</td><td class="mono">250</td><td class="mono">&minus;1.2753</td><td class="mono">93 / 196</td><td ><span class="pill open">not enough seeds</span></td></tr>
+        <tr><td class="mono">14</td><td class="mono">250</td><td class="mono">&minus;1.4528</td><td class="mono">10 / 196</td><td ><span class="pill open">not enough seeds</span></td></tr>
+        <tr><td class="mono">15</td><td class="mono">250</td><td class="mono">&minus;1.3834</td><td class="mono">28 / 196</td><td ><span class="pill open">not enough seeds</span></td></tr>
+        <tr><td class="mono">13</td><td class="mono">24,000</td><td class="mono">&minus;0.7914</td><td class="mono">196 / 196</td><td ><span class="pill ok">solved</span></td></tr>
+        <tr><td class="mono">14</td><td class="mono">24,000</td><td class="mono">&minus;0.7914</td><td class="mono">196 / 196</td><td ><span class="pill ok">solved</span></td></tr>
+        <tr><td class="mono">15</td><td class="mono">3,200</td><td class="mono">&minus;0.7914</td><td class="mono">196 / 196</td><td ><span class="pill ok">solved</span></td></tr>
+      </table></div>
+      <p class="hint" style="margin-top:12px">That middle block matters, and it is exactly the sort of thing a
+      search is happy to hide from you. Widths with many possible long-column patterns get many effective
+      restarts; width 14 divides 392 exactly, so it has <em>one</em> pattern and got 250 attempts where width
+      11 got 82,500. The fix is simply more seeds. Widths 13 to 15 were rerun against the real cipher at the
+      deeper settings too, and returned <span class="num">&minus;1.32</span>,
+      <span class="num">&minus;1.34</span> and <span class="num">&minus;1.32</span> &mdash; nothing.</p>
+      <p class="hint" style="margin-top:10px">In a blind sweep across widths 2&ndash;14 the true width scored
+      &minus;0.79 and every wrong width scored between &minus;1.42 and &minus;1.55. The gap is not subtle. If
+      the D'Agapeyeff cipher were a columnar transposition of a substitution over English, it would look like
+      the top row of that table.</p>
+    </div>
+
+    <div class="panel" style="margin-top:16px" id="results">
+      <h3>What came back from the real cipher</h3>
+      <div class="scroll"><table style="width:100%">
+        <tr><th >Attack</th><th >Search space covered</th><th>Best score</th><th >Verdict</th></tr>
+        <tr>
+          <td >Substitution only</td>
+          <td >all mappings of 18 units to 26 letters</td>
+          <td class="mono">&minus;1.49</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Keyed columnar, whole units</td>
+          <td >widths 2&ndash;15, every long-column pattern, column order solved exactly, 250 seeds each and 24,000 at the widths that needed it</td>
+          <td class="mono">&minus;1.32</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Keyed columnar, single digits</td>
+          <td >widths 3&ndash;13 &mdash; all 641,000 keys that leave the alternation intact; even widths are impossible outright</td>
+          <td class="mono">&minus;1.42</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Unkeyed geometry</td>
+          <td >614 routes &mdash; plain columnar to width 40, boustrophedon columns, the book's own "Chinese manner" from page 126, right-to-left, rail fence 2&ndash;30, four spirals and both diagonals on every exact rectangle, each also reversed</td>
+          <td class="mono">&minus;1.42</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Repaired text</td>
+          <td >digit 195 set to 6, 7, 8 and 9 in turn, and the whole stream reversed, each through the full width sweep</td>
+          <td class="mono">&minus;1.33</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Double transposition, one key twice</td>
+          <td >every column order at widths 2&ndash;11, applied twice &mdash; 43.9 million keys</td>
+          <td class="mono">&minus;1.35</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td ><b>Double transposition, all four directions</b></td>
+          <td >priority 2 &mdash; every pair of column orders with both widths from 2 to 7, in all
+          four combinations of apply and undo. UU is the ordinary reading; UA, AU and AA had never been
+          searched, and the 2017 finding says direction is exactly what he got wrong.
+          <b>139,806,976 key pairs</b> across 144 width-and-direction combinations</td>
+          <td class="mono">&minus;1.34</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td ><b>Crib dragging</b></td>
+          <td >a structural test rather than a statistical one &mdash; a crib's letter-repetition
+          pattern must be reproduced exactly by the units it lands on, which is checkable without knowing the
+          substitution and cannot be overfitted. Every crib of nine letters or more against widths 2&ndash;12,
+          every consistent column order enumerated. <b>Proved on a control first:</b> handed one crib that
+          genuinely occurs, it returns the true plaintext ranked first at &minus;0.7914, runner-up &minus;1.31.
+          On the real cipher: <b>1,495,884 placements</b>, 143,948 pattern-consistent, best &minus;1.41 &mdash;
+          and the top fifteen span a band just <b>0.021</b> wide, against the control's <b>0.52</b> gap between
+          the answer and the runner-up. When the answer is present it separates; here nothing does</td>
+          <td class="mono" id="r-crib">&minus;1.41</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Wide keys that divide 392</td>
+          <td >priority 8 &mdash; widths 28, 49 and 56, where the rectangle is complete and only one
+          long-column pattern exists, solved by beam search</td>
+          <td class="mono">&minus;1.19*</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Irregular columnar</td>
+          <td >the same widths again with the short cells allowed in the <em>wrong</em> columns &mdash; the commonest hand slip</td>
+          <td class="mono" id="r-irr">&minus;1.34</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td ><b>Scoring only the opening</b></td>
+          <td >priority 1 &mdash; the four-gram score taken over the first 24, 32, 40, 50, 64, 80, 100, 130 and 196 letters, at every width 2&ndash;15. A genuine partial solution would hold near the English reference and then fall off a cliff</td>
+          <td class="mono">see notes</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >The midpoint split</td>
+          <td >priority 3 &mdash; the anomalous unit sits at unit 98 of 196, so each half swept alone, halves swapped, each half reversed, and the anomaly deleted</td>
+          <td class="mono">&minus;1.15*</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Other unit counts</td>
+          <td >priority 4 &mdash; 193 to 197 units, in case the tail is not three nulls or a group was lost from the end</td>
+          <td class="mono">&minus;1.35</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Nulls at fixed intervals</td>
+          <td >p.111's own suggestion &mdash; every 2nd to 9th unit struck out at every offset, and the complement; then every subset of 1&ndash;4 cells treated as null cells (4,047 subsets); then both together</td>
+          <td class="mono">&minus;1.24*</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >The transposition run backwards</td>
+          <td >widths 2&ndash;30 read the other way &mdash; ciphertext across the rows, columns off in key order. The natural-order column of that sweep needs no key search at all, so it is a clean detector, and it is flat everywhere</td>
+          <td class="mono">&minus;1.32</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+        <tr>
+          <td >Real words and phrases as keys</td>
+          <td >6,616 candidates &mdash; every word in the book's vocabulary, every date in 1939, the chapter titles, the author's name, and the challenge sentence itself with its fourteen initials &mdash; each read four ways</td>
+          <td class="mono" id="r-wrd">&minus;1.42</td>
+          <td ><span class="pill ko">no</span></td>
+        </tr>
+      </table></div>
+      <p class="hint" style="margin-top:12px">The head-scored sweep deserves its own note, because it is
+      the one that mattered most and its failure is instructive. At N=24 the best fits reach
+      <span class="num">&minus;0.61</span> &mdash; <em>better</em> than real English's
+      <span class="num">&minus;0.74</span> over the same span. That is not a solution, it is proof that 24
+      letters and 18 free symbols can be forced to look like anything. What a real partial solve looks like is
+      a score that <em>holds</em> near the reference as N grows and then drops off a cliff at the point where
+      the hand slipped. Instead every width decays smoothly from N=24 onward, identically. There is no cliff
+      because there is no plateau.</p>
+      <p class="hint" style="margin-top:10px">*The wide-key, midpoint and null rows score higher only
+      because they leave the solver more freedom, not because they read. At width 49 each column holds four
+      units, so ordering 49 near-arbitrary fragments will fit almost anything; the midpoint and null rows
+      leave shorter texts standing &mdash; 97 units, or 78 &mdash; and short texts overfit. None of them read. The
+      null row's &minus;1.24 comes from a reduction that leaves
+      only 78 letters standing; short texts overfit, and it reads as nothing. Otherwise nothing rises above
+      &minus;1.32. The control's <em>wrong</em>
+      widths sat at &minus;1.42 to &minus;1.55, so every number in that column is what this machinery returns
+      when there is nothing there. About <b>222 million</b> distinct keys have now been tried, plus roughly 1.8 million
+      runs of the exact column-ordering solver, each of which searches every column order at its width.</p>
+    </div>
+  </div>
+<h3 class="grouphd" id="raw" style="margin:26px 0 10px;font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)">Raw output &mdash; every run, unedited</h3>
+<div class="panel"><p class="hint">These are the actual console transcripts. Scores are mean log&#8321;&#8320; probability per letter under the four-gram model: real English <b>&minus;0.74</b>, the same text shuffled <b>&minus;1.89</b>, uniform random <b>&minus;2.36</b>. Anything in the &minus;1.3 to &minus;1.5 band is what this machinery returns from noise.</p></div>
+<div class="panel"><h3>CONTROL: the attack solving a cipher it is allowed to know exists</h3><p class="hint">the same pipeline, on English put through a keyword square and a real columnar key. 196/196 letters at every width up to 12, and past that only because 250 seeds is not enough &mdash; at 24,000 it solves 13 and 14 too.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver dpcontrol 2 15 250</span></div><pre>DP CONTROL  -- English through a keyword square, then a columnar transposition
+ true w  tried w  per letter   correct   plaintext
+      2        2     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      3        3     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      4        4     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      5        5     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      6        6     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      7        7     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      8        8     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+      9        9     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+     10       10     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+     11       11     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+     12       12     -0.7914   196/196   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATE
+     13       13     -1.2753    93/196   OPTENGLONDSOUNGSTHIGPURMIANDEFPACENGPURHOLLOVWAMPETI
+     14       14     -1.4528    10/196   ODLIYLUSINBTILGDRUNBLSETHADAEONDLYINGPUROMCHSONSEVVI
+     15       15     -1.3834    28/196   ONMODSUGMONRTINSIFNGADERLYTHEMROWUUORHMDLACINKYOHITE</pre></div></div>
+<div class="panel"><h3>CONTROL: crib dragging, proved on a known cipher</h3><p class="hint">a crib asks a structural question, not a statistical one. THREE has a letter-repetition pattern the ciphertext must reproduce exactly, and that is checkable without knowing the substitution at all. Handed one crib that genuinely occurs, the attack returns the true plaintext ranked first, with the runner-up half a point behind.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver crib 11 11 12 control</span></div><pre>CRIB CONTROL - a known cipher, width 11.
+  plaintext begins: ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWVIBRATESWITHABO
+  control cribs (all verified present): BEINGAFRICAN
+  true position of BEINGAFRICAN in the plaintext: 23
+1 cribs of 12+ letters, widths 11-11
+A hit is a placement whose letter-repetition pattern the ciphertext reproduces exactly.
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+
+placements tested : 10,175
+pattern-consistent: 1,847   (18.1523% survive)
+
+   score crib             w  pos   plaintext
+ -0.7914 BEINGAFRICAN    11   23   ORTANDLONGSOUNDSTHEDRUMBEINGAFRICANDRUMHOLLOWV  &lt;== EXACT
+ -1.3073 BEINGAFRICAN    11   23   OFTANDLNOGSOUNDSTHDEFUMBEINGAFRICANDFUMHLOLOWV
+ -1.3264 BEINGAFRICAN    11   23   ORTANOLDNFSOUNDSEHTDRUMBEINGAFRICANDRUOHMLLOWV
+ -1.4118 BEINGAFRICAN    11   23   OGTANNPODRSOUNDSDHETGULBEINGAFRICANDGUPHOLPOWV
+ -1.4467 BEINGAFRICAN    11   23   ORSANCYONGNOWWCSTHUCRUMBEINGAFRICANORWMHOYYILV
+ -1.4748 BEINGAFRICAN    11   24   CCFTANDWNSGECONDSTHDOFUPBEINGAFRICANDFOPHWCWEM
+
+CONTROL RESULT: 196/196 letters correct  SOLVED</pre></div></div>
+<div class="panel"><h3>Crib dragging on the real cipher</h3><p class="hint">every crib of nine letters or more against widths 2 to 12, all consistent column orders enumerated, the substitution completed by restarts with the crib's own letters held fixed.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver crib 2 12 9</span></div><pre>CRIB DRAGGING  196 units, 18 distinct
+9 cribs of 9+ letters, widths 2-12
+A hit is a placement whose letter-repetition pattern the ciphertext reproduces exactly.
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+
+placements tested : 1,495,884
+pattern-consistent: 143,948   (9.6229% survive)
+
+   score crib             w  pos   plaintext
+ -1.4062 THEREADER       12   85   OFNERDSITWAARBISTAHRISFOSTOATEFBHARDBSTHECORRB
+ -1.4069 THEREADER       12  161   ALOSSAMAGNINGNENDONMODESAUSTTOGGMATDGRALNUGNIU
+ -1.4080 THISISTHE       12   27   DDEAICHBSTOSDOTIENLJNRTDNDCTHISISTHELCRECLITSA
+ -1.4106 THEREFORE       12  109   LDHIRAMCAMNDSIDSCHADEAINHIMRHORETNMDIENDACCDIN
+ -1.4118 THEREFORE       12  128   ITROLOMILDITMAITREASIERLTTNOMROCANMASAHONTLOAO
+ -1.4198 THEREFORE       11  154   RUSEANPTRPDALLEOFPEONAONNFYOMLIILEAROEENANFAMT
+ -1.4201 THISISTHE       12   42   DETPPRITHTOOETCOISDPIESOHANDPAPPCHECABORDOTHIS
+ -1.4213 THEREADER       12  169   UIEOILDRUENEONADUORTDULTULHDEANDIURCITDASOOKSL
+ -1.4219 THISISTHE       12    5   NTGRATHISISTHEAECTASDSGIGNIGADDNOCURSACTCEAHTC
+ -1.4222 THEREADER       12    5   TYRSLTHEREADERAAIUAISRLUTASNTSOELIENTILHREMINA
+ -1.4227 THISISTHE       12   27   DCTIFSHOSFOEURREECLERCINOLOTHISISTHEERLNRROHSS
+ -1.4235 THISISTHE       12   15   TNNEAOENUSAHOMSTHISISTHEADSTITURNUOMETHMNGSHCC
+ -1.4253 THEREADER       12    1   MTHEREADERRDSNDTOISAHEENHARDTLOACONDARNIHADITT
+ -1.4269 SUBSTITUTION    11  104   IRRRIESELAMOIOWNMEDSADVOTSIMAGDGTAADDSUSOROGLU
+ -1.4272 THISISTHE       12   25   UPTHAESITISMAOASCPEACAPORTHISISTHEPHYSUERMECAE
+CRIBDONE2</pre></div></div>
+<div class="panel"><h3>The main attack on the real cipher</h3><p class="hint">keyed columnar over whole units, every long-column pattern, column order solved exactly.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver dpattack 2 15 250</span></div><pre>DP ATTACK on 196 units, 18 distinct: 04 62 63 64 65 71 72 74 75 81 82 83 84 85 91 92 93 94
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89, random -2.36
+  w  per letter   plaintext
+  2     -1.4697   DTIAURUESUMAEUSONIOOEUNDAEBSAOADEDURESULDIUMPITIODNDTRYANOLT
+  3     -1.4906   OOSMITEMIATEEIRAATERREOALBOIHADTRTANUMETMMORAOUNDENONIARMLOU
+  4     -1.4614   NDDUSUNAIONODAROOTSHSMICOULDREDHAEUTRDCROIIDUENTDRUSHSEQRMAS
+  5     -1.4319   DNEIDASHIPNOBBRTADICHBOOCAACRIHCDDROAGNIISCIDODSOTHYASDEBORD
+  6     -1.4187   XNUTEDTOOEFNELSLITDINFAUDDPOISFORLANCDCAINIALDINFELECGUARGLC
+  7     -1.4391   SDBERCODCCLOCDITSOTETTENTTHANHNDRESHCHLRHIDHIIILOLSEATHTBALB
+  8     -1.3750   NFLUDASABLLRULTSSEURROUSVOTITEANBONUIBOTICSATRTUTDICELOWNAUS
+  9     -1.3800   LAMIESPONEIOVEMRPMTORINTSIMERPINORORAHARORSSORIOHIERHMAHERST
+ 10     -1.3844   SRNEBENEURONTMEEDBBINUREDLMBLARISECECONTEEBUTACMALICTUAMESCT
+ 11     -1.3722   IOGSNROASGRANTGLTABITRSAONNEESANCESOFGITDLMTICONNELINDSINUNT
+ 12     -1.3503   DEESANOLEASIOLADRDINSTORONSSUTLIAMEOTRSENDDLFOFPIANSITSTULRU
+ 13     -1.3628   UOCNTTETHTODDBBINNSUPSCHCHAREBOBEHODRANEIGREATUSTSDOUTDODIAB
+ 14     -1.3652   LRONLATEMDADAMDIOOUNTRONEMRTSCESOTEDASEMROSCCESSSSUIDISALUEC
+ 15     -1.3699   GSSTODOUGGASSINGESGOINNUNGANTTDUBACDSSISMTUSTENBURBALIEUROGB
+
+w=12  -1.3503  columns [3,1,6,7,11,4,0,8,9,5,2,10]  long blocks [1,3,6,7]
+  DEESANOLEASIOLADRDINSTORONSSUTLIAMEOTRSENDDLFOFPIANSITSTULRULMMULDISEAOMPADORDSARTOLDANTOMTYRROLEEFFALAFDMYUMETOTUTILLMULLDHOISTRDFROIFFERENTAFLETIRDIDNIMADROVIAANSUMMNARITIATRIMAOFLIEPUEDFGOLANDA
+w=13  -1.3628  columns [6,2,9,1,4,0,3,11,5,8,12,7,10]  long blocks [6]
+  UOCNTTETHTODDBBINNSUPSCHCHAREBOBEHODRANEIGREATUSTSDOUTDODIABEWBSOUNSEESTBEDOFAUDCURITHHOTSBYOREACCHESESONTRECESOCCCACETINACBBUNTISITONCIPATENAHIGABANARBBAISRUNSAANTERENDUDICURUBCSSISADETBCBEOBPHOR
+w=14  -1.3652  columns [12,7,8,0,13,2,11,4,10,6,5,3,1,9]  long blocks []
+  LRONLATEMDADAMDIOOUNTRONEMRTSCESOTEDASEMROSCCESSSSUIDISALUECTUTNUASDURLDCONCARCTLITITERCINOTTDONISSUCAARLIESTEDUEMLINMOMREONIOUANARTMICIINISNEACENOUIDIARASMMRINTEMDLORCIONEONNALDISSITHFUGBGERWAGOB</pre></div></div>
+<div class="panel"><h3>Priority 1 &mdash; scoring only the opening</h3><p class="hint">if the encipherer slipped part-way, the right key still reads the first letters. It does not. Every width decays smoothly from N=24 onward, and at small N the fits beat real English, which is the signature of overfitting rather than of a partial solution.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver head 2 15 250</span></div><pre>HEAD-SCORED SWEEP
+HEAD-SCORED SWEEP  196 units, 18 distinct
+Only the first N letters are scored. A genuine partial solution shows as a high
+score at small N that decays as N grows past the point where the hand slipped.
+
+Reference, real English scored over its own first N letters:
+  N= 24:  -0.738  N= 32:  -0.741  N= 40:  -0.752  N= 50:  -0.735  N= 64:  -0.741  N= 80:  -0.743  N=100:  -0.737  N=130:  -0.741  N=196:  -0.745
+
+  w      N=24      N=32      N=40      N=50      N=64      N=80     N=100     N=130     N=196   best opening at N=40
+  2    -0.782    -0.971    -1.032    -1.074    -1.201    -1.265    -1.326    -1.390    -1.505   CASEDONOOWSVONIWERIIONARNSWHISASANDOWNTO
+  3    -0.859    -0.917    -1.015    -1.113    -1.195    -1.213    -1.334    -1.411    -1.502   CIVISETOTSHOEORTHEHORROHIBINTHAGREECHPOS
+  4    -0.788    -0.917    -1.058    -1.104    -1.140    -1.254    -1.285    -1.372    -1.453   ASABBRSTBEENDERATHMENLITWASEAHODSMORLDAD
+  5    -0.688    -0.895    -0.965    -1.017    -1.122    -1.204    -1.257    -1.273    -1.414   AEOFASEUMCONINTHESARMINIRSTSREMARATIOSBE
+  6    -0.657    -0.827    -0.946    -0.970    -1.106    -1.186    -1.262    -1.350    -1.419   CUPICTICAERALENTIRSETUALLIMPRESYONSALLYT
+  7    -0.788    -0.917    -1.011    -1.089    -1.192    -1.246    -1.283    -1.340    -1.430   KSONTWHONOTOFTHEWEENDLEARWEELSWHATLASADO
+  8    -0.681    -0.807    -0.896    -0.970    -1.064    -1.184    -1.225    -1.294    -1.401   RAUTHTHEENTINFREINTRAMISSYOUMSORIGINEITU
+  9    -0.674    -0.806    -0.901    -0.954    -1.026    -1.132    -1.200    -1.304    -1.421   AWASHADASIOAREGREATHOFTHEINGHORINTRATTER
+ 10    -0.655    -0.737    -0.851    -0.921    -1.027    -1.130    -1.182    -1.281    -1.378   SYAPOSITYTORYOLETTERSEVEADATLAZERSTHEDEC
+ 11    -0.657    -0.726    -0.843    -0.912    -1.021    -1.113    -1.187    -1.241    -1.388   EWWOFTHOUNDSWHENTASTHEBLISHASINONTHATEST
+ 12    -0.605    -0.739    -0.836    -0.911    -0.975    -1.103    -1.149    -1.252    -1.360   NNDPAPERANTARTISHANTSPIONTHEUROPERSWROTH
+ 13    -0.711    -0.774    -0.873    -0.981    -1.062    -1.101    -1.183    -1.232    -1.404   EARTRATIONTOUSFOURUPONDIFWEREANDFICENCET
+ 14    -0.763    -0.842    -0.902    -0.985    -1.130    -1.216    -1.258    -1.347    -1.384   PATHENTHEPERSOFARANSHORTSOLOONDONTHEADSD
+ 15    -0.615    -0.787    -0.800    -0.929    -0.982    -1.083    -1.180    -1.280    -1.366   DICTICENTINGITATICALENTEDISESEWHOGAINDIN
+
+STRONGEST OPENINGS (by score at N=40)
+  w=15  -0.800   DICTICENTINGITATICALENTEDISESEWHOGAINDINTHALIAHQGEDHALQECCDXDLWIHSNDCQ
+  w=12  -0.836   NNDPAPERANTARTISHANTSPIONTHEUROPERSWROTHERNDIANTPILAIEOHSDRSRSUWSWNTOU
+  w=11  -0.843   EWWOFTHOUNDSWHENTASTHEBLISHASINONTHATESTHEOEVTILUDIDMOHAVIEVEAWEXOSLVL
+  w=10  -0.851   SYAPOSITYTORYOLETTERSEVEADATLAZERSTHEDECTZZSORYLESVERIYVZHORHVHLEIIHOS
+  w=13  -0.873   EARTRATIONTOUSFOURUPONDIFWEREANDFICENCETOATCASEWSDIMDOEVOINETSWNATDCAE</pre></div></div>
+<div class="panel"><h3>Priority 3, 4 and 8 &mdash; the midpoint split, other tail lengths, wide keys</h3><p class="hint">the one anomalous unit sits at the exact midpoint, so the halves were swept separately, swapped, reversed; then unit counts other than 196; then the widths that divide 392 evenly.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver halves 2 13 120</span></div><pre>MIDPOINT SPLIT AND TAIL LENGTH
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+
+A. the message cut at the midpoint, each half swept on its own
+  first half, units 1-97             w=10   -1.1537   SOSEAIERTHSTRANDOESNKONESTHESLATTEDLAPOICTID
+  second half, units 99-196          w=10   -1.2065   TRGGGMERGAMENDSUPPROPIMATIVEEROMSCOWDEPPMOPA
+  first half incl. the 04            w=10   -1.1610   ONMOLERATANATMESPLAJOADSEENTPSNORTUEDNMINLAN
+
+B. halves recombined
+  halves swapped                     w=12   -1.3554   ROTESRSOIRSGOTMOROMADEIDESINMMSBETINTARCOMMI
+  second half reversed               w=13   -1.3553   ENSTANOCCLEOUOMZTRATSASUSANDSANINNAMEARAOMIN
+  first half reversed                w=12   -1.3520   NSLALLGHTEEDONETISREACMCESSCAEREDHEORLSONMRD
+  the 04 removed entirely (195)      w=11   -1.3584   OFOMOLLOMNDSTEMERIISTIUSTBEARRASTRIISUSEGULI
+
+C. the tail is not what we assumed - other unit counts
+  196 units (drop 0 digits)          w= 8   -1.3549   IONANALSSINDEDURSNADMRSALMROMOVIRELATRUMAUSI
+  195 units (drop 2 digits)          w=12   -1.3519   TDVOTETASHEFNUEMADOFMONDDDDONNTATESSHIMMOSTH
+  194 units (drop 4 digits)          w=12   -1.3690   FFMIRDENTDALMISTOTRINAFRIONOFCAIMENARARNSTOE
+  193 units (drop 6 digits)          w=13   -1.3622   TTBRCBCHBRINSONBONLEOLASTNNANSDAHNDCCBHESHTO
+  192 units (drop 8 digits)          w=13   -1.3174   LOBDOINSASRUDCLLONENDUNBELLEIEIDECAROSEISLAA
+  197 units (all 395 digits)         w=12   -1.3453   LRECONPLUSONROMEEROMEDALDDUSANENINSARESRSNDB
+
+D. wide keys where 392 divides evenly
+  w=28   -1.3096   RDRULTUOILOADHESHIDABDDBCUABOITEATSHOATISTOT
+  w=49   -1.1901   INDSONSSTHENSESWEROWARSTHOSEDSTHEWWMMOTSTOMA
+  w=56  no arrangement</pre></div></div>
+<div class="panel"><h3>Priority 2 &mdash; double transposition in all four directions</h3><p class="hint">the 2017 finding says direction is exactly what d'Agapeyeff got wrong. UU is the ordinary reading; UA, AU and AA had never been searched.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver dbl4 2 7</span></div><pre>DOUBLE TRANSPOSITION, ALL FOUR DIRECTIONS
+DOUBLE TRANSPOSITION, ALL FOUR DIRECTIONS  196 units, 18 distinct
+d1/d2: U = undo (read columns into rows), A = apply (rows into columns)
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+
+ dir  w1  w2           keys  best/letter   plaintext
+  UU   2   2              4      -1.5654   TIGISTRGOTDDINDRDSFLSOEUDHIGNIFARGLANENIDOIO
+  UU   2   3             12      -1.5021   UBODCEEOTUASTDCBIUADELAGDCTSINERIUARDADUATIC
+  UU   2   4             48      -1.4434   TINABIRRORMSBAOEBYAOUASYSEVIONNYUMMYISALSBUS
+  UU   2   5            240      -1.4838   UONEYARECYARRORSUEENERLANTRLADYDMINORURESRON
+  UU   2   6          1,440      -1.4417   LNAAMEINCEEMDIEOISDANTONTIMCAROMSBCMISMTLINE
+  UU   2   7         10,080      -1.4134   TMRSLNGGALOSSTREAMANTCANMORLIDIMSOIAOATONLED
+  UU   3   2             12      -1.4973   ACROEHTATENINOSCHDIRACTICSMHNDTAUPDICAPICIDA
+  UU   3   3             36      -1.4884   LCATEGLRENONUEDETUPTUDORSSGNTDGODEUNNDIAURAD
+  UU   3   4            144      -1.4154   LCRCCEIIERAEOADDINBETCOBTAACDSRDUNBRANIDEATD
+  UU   3   5            720      -1.4152   DNTIEUITNNANSTERSUSTSISNOTAEDNDURNANHNFUCEEO
+  UU   3   6          4,320      -1.4449   NAIOINPAUNCRUIISUMNDTPSOAPIOROEIATPRIEEOPPER
+  UU   3   7         30,240      -1.4065   BISHUMBOOUPAAAEETBODASHAEDEDAMTTOETDATITARED
+  UU   4   2             48      -1.4898   AODIANNIUTLOUEANUAOOTRTRSIXDSRDEARLTTCOLITSA
+  UU   4   3            144      -1.4567   ANUOIUOOABAATERBEAUIRILSOSTORBBITUDYLISBOBAL
+  UU   4   4            576      -1.4468   ICOONINTIACOSCASUILTRECCUTPSIIEEUNNTTNUICTCD
+  UU   4   5          2,880      -1.4309   SYIOSOTSITDECREAABETNDREORNASROOUPELEEINTERR
+  UU   4   6         17,280      -1.4224   AIUSTEUNHOHASAWHEEOMSRAEDMETHYNTHUETRYHIDDLE
+  UU   4   7        120,960      -1.4125   OUBUINCDAESUBRCTLRULUTABDALSIEETILISTDIAOADE
+  UU   5   2            240      -1.4579   NDANATELEDTLMYAAOEEEIDTABLEDUBSUNTOIEDERMADE
+  UU   5   3            720      -1.4498   UDMNSTAMOOCAREDMAMEARRTRONDEMMRICAAATNABCEED
+  UU   5   4          2,880      -1.4281   TINITSSSIANDIHADEYDISCHDNDBEHDESTESDEUBRODND
+  UU   5   5         14,400      -1.4212   HUELEATSVAOATANLIOSURISETHHHENWEEDOTSNECLTLI
+  UU   5   6         86,400      -1.4058   RMCIANFANEDBCCBAEIATBBCBDEBASETEAMCATHERESTC
+  UU   5   7        604,800      -1.3523   RISDUTSUCTNSTCRCIICNUEDUSBBBARNEROTENIAUNOSS
+  UU   6   2          1,440      -1.4405   OCUNSNEEESANDTEDESLOHLTAAHINDDONUOLASARDDETI
+  UU   6   3          4,320      -1.4244   DIAOTLRNISETRRALBIIRULDARAOESNUCSRORSECANSIE
+  UU   6   4         17,280      -1.4141   LTLLLYEETIUDSEUNRYORTIBEDELETUOTGNATIONAIDIN
+  UU   6   5         86,400      -1.3911   LIRATEPLOOCALLABAROCEDERNETTARYAOPRIIIILAREL
+  UU   6   6        518,400      -1.3718   BHDANDERCAHIBCCDOOMASSEONEHERAELICATHESHERIA
+  UU   6   7      3,628,800      -1.3392   UEUTTCCCBAODURINRANAPPEDPNSBITRUNUSPEERNEDEC
+  UU   7   2         10,080      -1.3937   HNNIAHNPUSROUPPARSRIISHSTODOPAREHEONEALASSTH
+  UU   7   3         30,240      -1.4013   MPRIAIDORLOAINDIAOEARLNIROPRTALLISALMSAULEOI
+  UU   7   4        120,960      -1.3985   LRTLLDDBBINALBEURSUSCODIAINLRSETOSOEURIATDEE
+  UU   7   5        604,800      -1.3810   CCIDCHTTATUSEFICSCHTSALSINOLLECOULDOTODANSND
+  UU   7   6      3,628,800      -1.3718   RCCALEDSERRCROOROSCNESSNUNEMAALLTONAOLNDSITM
+  UU   7   7     25,401,600      -1.3460   NNRYRHYOTTOORMINEBROEAABOOBEAONALMLEROYANOEB
+  UA   2   2              4      -1.4627   UNOIUPRPREAPHOARIASHCEEEAAUINRISPHANSTNNYNTC
+  UA   2   3             12      -1.4734   AIUCCUDDUTITHURCIDTWSTCENTACRNEHASACOPISASEP
+  UA   2   4             48      -1.5207   TIDIDNNCCTEMTRSAADASMYMEAOTIMRSRCENOTMISEHTA
+  UA   2   5            240      -1.4608   SDENCYCSERANDERANIRTINMSEPARMOISATATELLOMASS
+  UA   2   6          1,440      -1.4457   ASDSONLLIHHIRTCHARTOAWLIOOSCCECACTLYOCORUDRA
+  UA   2   7         10,080      -1.4095   IAWNONGTRNBOUTOISIKEUNUUETKRSOEMOSEDAPPMPPAI
+  UA   3   2             12      -1.4658   BATHHIENTECEIGENTSTHHTCSAINACLOBONSAELSONTIE
+  UA   3   3             36      -1.5300   EHISMHOHMCTIMCCEDTOONOCCEMSAEDTAHCDLAAAWLNLN
+  UA   3   4            144      -1.4824   NRLABLICALICSNROTOAAUINEOFDDRTIRBIRSLCIIELPU
+  UA   3   5            720      -1.4733   EROSSRYSSEDANMYUNOUNTRNICLYTACROYYONKLAMAAOO
+  UA   3   6          4,320      -1.4359   DDDLECLHOCSAACIEOCISKINARTDEFORCANTTERSDAEAI
+  UA   3   7         30,240      -1.3960   EBNDANITHHLTILNONLADEROCIAOCAOLDRABRARLLORDB
+  UA   4   2             48      -1.4803   ASEONDDIDCBODICREPRRDIPSIOYCROOSSIDNCIDMESDB
+  UA   4   3            144      -1.4691   SRNPOPFINATASPOREURRUNFIITSPIECALNLYRAORLOSE
+  UA   4   4            576      -1.4627   UNOIUPRPREAPHOARIASHCEEEAAUINRISPHANSTNNYNTC
+  UA   4   5          2,880      -1.4444   INOWNTOHSGAROOMTHEUGSOURTANAUOHDDNEGDEERINGS
+  UA   4   6         17,280      -1.4184   BRBETLETOBCHBSHRUNNOACLBBMRSCBSABLISNISHDLCA
+  UA   4   7        120,960      -1.3965   ADRESSLRSOISTATUSIONREPLTSATODOTOODINCEDSERA
+
+... 91 further lines omitted</pre></div></div>
+<div class="panel"><h3>His own hint about dummy letters, page 111</h3><p class="hint">every subset of one to four cells treated as nulls, 4,047 of them, each struck out and the remainder solved.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver nulls sym 60</span></div><pre>SYMBOLIC -- every occurrence of a chosen set of cells struck out
+  4,047 subsets of size 1-4
+    -1.2912   137 kept   nulls = 74,75,84,85    ENTETSASTSNIAOAANESINTRICORRAOASENGONIAR
+    -1.3109   134 kept   nulls = 64,74,83,85    ARTLRLELITIESEETRATILABAAAYSBBESEAAARTMS
+    -1.3120   135 kept   nulls = 72,75,81,83    ENASESDDSIATDIINTOIINEDNTSIRFORROADENCAI
+    -1.3149   129 kept   nulls = 62,64,74,81    ETALLLAITISNTESTILERSEEEZNRRNEAEETCANTES
+    -1.3149   135 kept   nulls = 64,74,81,84    SANEDADDENTINASTNDSHTSSSFIHHISESSANCEINS
+    -1.3158   128 kept   nulls = 64,75,81,83    ONRDODDERSEENSIEENONSDEALIAAIRONFREINEAS
+    -1.3164   137 kept   nulls = 64,72,75,85    AINANENOTOOITSEREEOOIASITNOLSDRLLEREAICO
+    -1.3234   143 kept   nulls = 64,65,74,91    ETIOTRONINSRDRRITESINESEEEZDRDREOEETIMOD
+    -1.3237   133 kept   nulls = 65,75,81,83    SAEOSOTTORENTRRANCRRASTANORUCCETSAPERCAR
+    -1.3253   135 kept   nulls = 64,65,74,81    DSTEOSOOERTRANTSDATRODADDDBNNDEDDSTMENTD
+
+BEST OVERALL
+  -1.2912  137 letters kept  --  nulls = 74,75,84,85
+    ENTETSASTSNIAOAANESINTRICORRAOASENGONIARASSONDEIEAADASONASIONAOOOKATTORSREPEETTTDSRFRIESANENSTACRESTITARDIINISEDEREIGDONNDDINNAIDENIASAEG
+  -1.3109  134 letters kept  --  nulls = 64,74,83,85
+    ARTLRLELITIESEETRATILABAAAYSBBESEAAARTMSTAEBEISTORREEOESATESTESSSWELLISIBBRXRRLLLOABAHBRETIRTLEYBRIILLEBOTRORBRAMOSTTOOTIATEOIRTAEAERM
+
+... 11 further lines omitted</pre></div></div>
+<div class="panel"><h3>Double transposition, one key applied twice</h3><p class="hint">43.9 million keys.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver dbl same 2 11</span></div><pre>DOUBLE TRANSPOSITION (same)  196 units, 18 distinct
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+  w         keys  best/letter   plaintext
+ 10    3,628,800      -1.3573   ESEEUUCAADEALALLOSUEOSUCCRESPEARELECLATIEFIRAUTIADNO
+ 11   39,916,800      -1.3451   HSESSDSEWHODONNSLARDARHEIRCALSUTDHTTSORAFUNITEITUTNC</pre></div></div>
+<div class="panel"><h3>Irregular columnar &mdash; the short cells in the wrong columns</h3><p class="hint">the commonest slip when doing this by hand on squared paper.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver irr 2 13 60</span></div><pre>IRREGULAR COLUMNAR (short cells put in the wrong columns)
+IRREGULAR COLUMNAR  -- the short cells put in the wrong columns
+196 units, 18 distinct.  reference: real English -0.74, shuffled -1.89
+  w  per letter   plaintext
+  2     -1.4510   ASUNDMRMMIUOMREINTEEMRSTRUIVEUSUSRDMIRLMNSOMNCNASESTDAUBETAL
+  3     -1.4762   TOIREBSTERBRSEARSBRAAUOSEHOMLSBBANSDBTROTTOASMNDORDSDEUATION
+  4     -1.4927   ATTESEANMEMOMUSTDNLMIOCNTHAMDTRULARSUITUTOOMLERANAUTJRNDNSCU
+  5     -1.4653   TEEADRESANCHDCLEIOASLYRLCYYSISEAREYWILDSYAAANNELLESORNULETIC
+  6     -1.4247   IULAIDULATENUSELDODBNFANMTUREONLAMONDLUEUNBLOEIMOVIRVENMORBR
+  7     -1.4801   COTDFUSTNFFFCTECESOEIAEORBEESTBROURINFBBUBCIBINITEASOBENODAN
+  8     -1.3946   NDRLDONSNORDERTUSTABBTONTSOEBALMONLUCTBUFACRIETALONDLEBTDCOA
+  9     -1.3951   SABSTUCUSSONOLLESRNEACOPRIANCALELESIOTEOFLRTOLOORLEEEERSAFFF
+ 10     -1.3663   CNRDOCENOTELEOOUFERSURESOBITSOUBBEFOREACDRENTLLEUNTILBIIDCRE
+ 11     -1.3823   DAISTIANSAWSECODEBNWIONRILOQDLWERDODEANOEUNLICINATICOURYWORA
+ 12     -1.3352   ILUNEUAUATIOUSEAPOSEAINENCOURTONPPICEATLACINSINFLYSCOENTOPUT
+ 13     -1.3790   LOLUSMESCASTSCDDURCOHRNUMATITDDUECLELAMRENTILSORGEISDOSLNLID
+
+w=12  -1.3352  columns [9,10,8,2,5,1,0,6,3,4,7,11]
+  ILUNEUAUATIOUSEAPOSEAINENCOURTONPPICEATLACINSINFLYSCOENTOPUTFFOAERSRYINSURPAPENIIIFOCONACEPTURACCOEGRUELROPAIFGROUPPOFLEOFLLIONIASAPCCSLESULUCHAPOPERPISCSLUSITRRATMEECIFTTERCPSLESESANABOUSEFPSCITY
+w=10  -1.3663  columns [5,8,4,9,2,6,7,1,0,3]
+
+... 1 further lines omitted</pre></div></div>
+<div class="panel"><h3>Real words, dates and phrases as keys</h3><p class="hint">6,616 candidates from the book's own vocabulary, every 1939 date, the chapter titles, and the challenge sentence with its fourteen initials &mdash; each read four ways.</p><div class="term"><div class="bar"><b>$</b> <span class="cmd">solver words words.txt 40</span></div><pre>WORD-KEY SWEEP  6,535 candidate keys x 4 readings = 26,140 trials
+reference: real English -0.74 (p05 -0.85), shuffled English -1.89
+ per letter  key                    reading        plaintext
+    -1.4221  REES                   units, apply   RRTHANSELDWIORSSIONDMEDICLHURLEFTHLRLLSAMDNMHD
+    -1.4253  NOLOGIST               units, undo    DMILIMMHNEAISMWHHWIGNNETSWILASLNTROTWOHASDSSSI
+    -1.4350  DIVIDED                units, undo    NOUSATROOTONNIEREALETRGEMEDEGRUMMANOGUGGLIGILL
+    -1.4364  POWERFUL               units, undo    RDLSFRIIELPOSLRSNPPLYONSNOTIFAEAMTLNTSFODOIOOT
+    -1.4381  GOVERN                 units, undo    UCRNEDNETTLICUSLDARUNITISDPULANOBTAINIOUUINDLA
+    -1.4381  NOTION                 units, undo    UCRNEDNETTLICUSLDARUNITISDPULANOBTAINIOUUINDLA
+    -1.4388  INSTRUCTIVE            units, apply   LTNEEDINBOISALRTCALBOUTARADUCANDRTSEDALUKOSNAR
+    -1.4390  SEEMED                 units, undo    CLORRTIULOOINTASUSTRELUABCAILUMNESDIDTAEAUSTAU
+    -1.4406  MATHEMATICS            units, undo    POINIDUORAUNIGNSARSTRUASITYREESOLINASNITRNORFL
+    -1.4419  ANNOUNCEMENTS          units, apply   ERDELAODINBRITUPNSRATITWOMLNODALANTDIEBCENAMIL
+    -1.4430  ARTISTS                units, undo    ANDTRUSSISAARSORTBOONNOLOEOFFALLTUNSIFFBUFFBBA
+    -1.4456  DMMZ                   units, apply   ISARBABOUTITIORITOREADORDSRRERCIENOTUBCREECCRA
+PHASE2 DONE</pre></div></div>
+<div class="pagenav"><a href="03-evidence.html"><span class="lbl">&larr; 03</span>Evidence</a><a href="05-what-went-wrong.html" style="text-align:right"><span class="lbl">05 &rarr;</span>What went wrong</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

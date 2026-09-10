@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The book&#x27;s toolkit &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="10-book.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[10] The book&#x27;s toolkit</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[10]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>The book&#x27;s toolkit</h1>
+  <p class="lede">The passages in Codes and Ciphers that bear on a message made of two-digit coordinates.</p>
+</div></div>
+<div class="wrap">
+<div class="panel">
+
+      <div class="note">
+        <div class="pg">pp. 16&ndash;17 &middot; Chapter I</div>
+        <h4>Polybius' torch code &mdash; the ancestor of the whole thing</h4>
+        <p>Five groups of five letters, Q dropped to get exactly 25. The signaller holds ten torches; the right
+        hand gives the group number, the left hand the letter within it. Two torches right and four left is the
+        fourth letter of group two.</p>
+        <div class="rel"><b>Bearing:</b> this is the challenge cipher's skeleton, stated in the book's
+        first chapter. Row coordinate, then column coordinate, one symbol per plaintext letter. The only thing
+        d'Agapeyeff changed was what the coordinates are written with.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">p. 117 &middot; Chapter VI</div>
+        <h4>The keyword square and the key numbering</h4>
+        <p>Keyword MANCHESTER, repeated letters struck out to give MANCHESTR, then numbered by alphabetical
+        rank: <span class="num">5 1 6 2 4 3 8 9 7</span>. The remaining letters of the alphabet fill the square,
+        and the cipher alphabet is read down the columns in numerical order.</p>
+        <div class="rel"><b>Bearing:</b> the exact mechanism for turning a word into a column order.
+        The Workbench's transposition tool implements this numbering, so you can type a keyword rather than a
+        permutation.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 117&ndash;118 &middot; Chapter VI</div>
+        <h4>Groups of five, and nulls to fill them</h4>
+        <blockquote>"For transmission, the cipher is sent in groups of five letters&hellip; ('Z' here is a
+        'null' to complete the five letters)."<cite>Codes and Ciphers, p. 117</cite></blockquote>
+        <div class="rel"><b>Bearing:</b> this is why the challenge ends
+        <span class="num">92000</span>. Two real digits and three nulls to round out the final group &mdash;
+        which is what leaves 392 working digits and 196 units. Not a guess: the book states the convention
+        three separate times.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">p. 118 &middot; Chapter VI</div>
+        <h4>The A&ndash;E square &mdash; the same cipher in letters</h4>
+        <p>A 5&nbsp;&times;&nbsp;5 grid with the keyword written in first and the rest of the alphabet after it,
+        J omitted "so as to get correct square". Rows and columns are labelled A to E, and ENEMY ATTACKS becomes
+        <span class="num">BA AC BA AA ED AB BC BC AB AD CE BB</span>, transmitted as
+        <span class="num">BAACB AAAED ABBCB CABAD CEBBE EEEEE</span>.</p>
+        <div class="rel"><b>Bearing:</b> the closest thing in the book to the challenge. Identical
+        structure &mdash; one plaintext letter, one coordinate pair, five-letter transmission groups, nulls at
+        the end. Note especially that the square is <b>keyword-filled, not alphabetical</b>, and that
+        <b>one letter is dropped</b> to make 25 fit.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 122&ndash;124 &middot; Chapter VI</div>
+        <h4>Playfair, with keyword CLIQUE</h4>
+        <p>Twenty-five subdivisions, I and J treated as one letter, text split into pairs, doubled letters
+        broken by a dummy X or Z.</p>
+        <div class="rel"><b>Bearing:</b> ruled out as the challenge's method &mdash; Playfair is
+        letter-to-letter and cannot produce 18 symbols over 196 units &mdash; but it confirms which 25-letter
+        reduction d'Agapeyeff reached for by habit: <b>I and J merged</b>. Worth preferring in the square editor.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 124&ndash;125 &middot; Chapter VI</div>
+        <h4>Combined Substitution&ndash;Transposition &mdash; the obvious suspect</h4>
+        <p>Three operations. First, ADVANCE BRIGADE TOMORROW through a MANCHESTER square into A&ndash;E pairs.
+        Second, the resulting <em>stream of single letters</em> written across a keyed rectangle and read down
+        the columns. Third, re-pair that transposed stream and look each pair up again, giving
+        <span class="num">EOLTQ AEBMR NDTPF CSLXH SCZZZ</span> for transmission.</p>
+        <div class="rel"><b>Bearing:</b> everyone's first hypothesis, and the measurements kill it.
+        Step two fractionates &mdash; it separates the two halves of each coordinate pair before shuffling them.
+        Run on this message it would leave no trace of the 6&ndash;9 / 1&ndash;5 alternation, and the
+        alternation is perfect (E4). The narrow-width version that would survive E4 was then enumerated to
+        exhaustion &mdash; all 641,000 alternation-preserving keys at widths 3 to 13 &mdash; and rejected. So
+        was the version with the transposition moved up a level, shuffling whole units. See Section 4.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">p. 127 &middot; Chapter VI, section 3</div>
+        <h4>"Numeral or Figure Ciphers" &mdash; the chapter the challenge belongs to</h4>
+        <blockquote>"In the most simple cases figure ciphers mean only that letters are replaced by numbers.
+        Arbitrarily, the equivalent of A, B, C, D, &amp;c., may stand for any numbers (preferably double) from
+        10 to 99&hellip; The odd pairs of figures may represent either frequently-used syllables&hellip; or a
+        complete code of short sentences or personal names."<cite>Codes and Ciphers, p. 127</cite></blockquote>
+        <p>The same page adds that numbers can serve as the keyword &mdash; "instead of Manchester as keyword
+        you can simply use the current dates, as for instance 2. 5. 1939, or any other sequence of numbers."</p>
+        <div class="rel"><b>Bearing:</b> the single most important paragraph in the book for this
+        problem. It licenses two-digit letter equivalents <em>and</em> tells you that some pairs may be
+        syllables or whole names instead of letters &mdash; the only mechanism in the book that would produce
+        the observed frequency profile (E6). E7 shows it cannot be the whole answer, but it can still sit
+        underneath the transposition. The date suggestion is worth remembering: a 1939 book with a 1939 key,
+        and "2. 5. 1939" is a nine-figure key.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 127&ndash;128 &middot; Chapter VI</div>
+        <h4>Selenus's syllable table, and an explicit invitation</h4>
+        <p>A grid of vowel-plus-consonant syllables &mdash; AB AH AN AG AM AT / EC EK EG EF EM ES / OF OM OS OC
+        OK OG / UN UB UT UF UP &mdash; which d'Agapeyeff criticises for omitting consonant-plus-vowel, then
+        recommends anyway:</p>
+        <blockquote>"it may serve as a foundation for a syllable cipher which may be quite interesting for the
+        reader to compose."<cite>Codes and Ciphers, p. 128</cite></blockquote>
+        <div class="rel"><b>Bearing:</b> thirty-one pages before setting the challenge, in the numeral
+        chapter, the author suggests building a syllable cipher on a small grid. A 20-unit syllabary reproduces
+        the cipher's odd frequency profile far better than any alphabet does &mdash; encoding real English
+        through one gives about 19.8 distinct units and 88% in the top thirteen, against the alphabet's 24 and
+        84%, where the cipher shows 18 and 96%. It cannot be the answer on its own (E7 rules that out for every
+        substitution), but as the layer <em>under</em> a transposition it remains untested.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 129&ndash;130 &middot; Chapter VI</div>
+        <h4>Dictionary code, then a second encipherment</h4>
+        <p>Page number plus word number, five digits per word, with leading zeros added "to keep to the
+        uniformity". Then: "These figures, if greater secrecy is required, could again be enciphered&hellip;
+        Divide the figures into pairs and then convert them into letters by means of the table given on p. 130."
+        That table is a 10&nbsp;&times;&nbsp;10 grid indexed by first figure and second figure, and it ends
+        <span class="num">NULLS: WA, WE, W, to end message in groups of five letters.</span></p>
+        <div class="rel"><b>Bearing:</b> proof that d'Agapeyeff thought in two-layer numeric systems and
+        in digit pairs. The direct reading &mdash; that the challenge is a dictionary code in five-digit groups
+        &mdash; is dead on E1. The inverted reading is not: a numeric layer underneath a coordinate square would
+        give a plaintext with no English letter statistics at all, which is exactly the shape of E6.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 135&ndash;136 &middot; Chapter VII</div>
+        <h4>His own opening moves</h4>
+        <p>Decide first whether it is code or cipher. Then decide transposition or substitution &mdash; by the
+        proportion of vowels to consonants, since transposition rearranges the original letters and leaves that
+        proportion intact. Then arm yourself with "squared paper, tracing paper, a graduated ruler", counters,
+        and coloured pencils.</p>
+        <div class="rel"><b>Bearing:</b> the vowel test is the one instrument he gives that we cannot use
+        &mdash; it needs letters, and we have coordinates. Sections 2 and 3 substitute the modern equivalents:
+        index of coincidence, n-gram scoring against controls, and a null model built from the cipher's own digits.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 141&ndash;145 &middot; Chapter VII</div>
+        <h4>The A&ndash;E cryptogram he could not immediately read</h4>
+        <p>A friend hands him a message in which "only the first five letters of the alphabet repeat
+        themselves". He splits it into pairs in red pencil, builds a bigram frequency table, finds CE = E and
+        CD&nbsp;DB = TH, and works out from there. Then the warning:</p>
+        <blockquote>"The letters are seldom put in such a straightforward alphabetical order; both the plain
+        text and the cipher letters (capitals) would be all jumbled together and not put in any obvious
+        order."<cite>Codes and Ciphers, p. 142</cite></blockquote>
+        <div class="rel"><b>Bearing:</b> expect the square to be scrambled, and expect the row and column
+        labels themselves to be in no natural order. That is why the square editor lets you edit the labels as
+        well as the cells &mdash; and it is why brute force over 25! is not a plan.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 144&ndash;146 &middot; Chapter VII</div>
+        <h4>On the encipherer's mistakes</h4>
+        <blockquote>"here I came to the first mistake made by the 'encipherer'. The 'F' of 'of' was omitted&hellip;
+        There are two missing letters and one misspelling&hellip; It is very common in deciphering to come
+        across mistakes either by the encipherer or by telegraphists, signallers, or others concerned with the
+        transmission of the cipher."<cite>Codes and Ciphers, pp. 144&ndash;146</cite></blockquote>
+        <div class="rel"><b>Bearing:</b> the author's own testimony that amateur encipherment is error-prone,
+        written fourteen pages before he enciphered something himself and never wrote down how. The stray zero at
+        digit 195 is the visible half of whatever went wrong; there may be more.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">pp. 150&ndash;153 &middot; Chapter VII</div>
+        <h4>How he says to attack a transposition</h4>
+        <p>Count the letters, factor the count into a rectangle &mdash; "there are 36, which is
+        6&nbsp;&times;&nbsp;6, and we therefore construct a square accordingly" &mdash; write the cipher down the
+        columns, then shuffle columns until a line reads. He notes that transposition is harder than
+        substitution because it takes "a great deal of patience and perseverance to plod through dozens of
+        possible combinations".</p>
+        <div class="rel"><b>Bearing:</b> 196 = 14&nbsp;&times;&nbsp;14 is precisely the invitation this
+        method sets up, and it is almost certainly deliberate. The 14&nbsp;&times;&nbsp;14 view in Section 1 and
+        the transposition tool in the Workbench are there to take him up on it.</div>
+      </div>
+
+      <div class="note">
+        <div class="pg">p. 159 &middot; Chapter VII, last page</div>
+        <h4>The invitation</h4>
+        <blockquote>"Here is a cryptogram upon which the reader is invited to test his skill."
+        <cite>Codes and Ciphers, p. 159 &mdash; the last sentence before the Bibliography</cite></blockquote>
+        <div class="rel"><b>Bearing:</b> he gives no hint of the method, no key length, no promise of a
+        solution, and &mdash; unlike the two exercises earlier in the chapter &mdash; no answer at the end.
+        The 1952 reprint drops the paragraph entirely.</div>
+      </div>
+
+    </div>
+  </div>
+<div class="pagenav"><a href="09-assessment.html"><span class="lbl">&larr; 09</span>How it could be cracked</a><a href="11-workbench.html" style="text-align:right"><span class="lbl">11 &rarr;</span>Workbench</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

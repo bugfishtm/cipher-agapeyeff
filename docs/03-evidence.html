@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="03-evidence.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[03] Evidence</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+<ul class="navsub">
+<li><a href="#ev-structure">E1–E4 structure</a></li>
+<li><a href="#ev-language">E5–E6 language</a></li>
+<li><a href="#ev-order">E7–E8 order</a></li>
+</ul>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[03]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>Evidence</h1>
+  <p class="lede">Eight measurements, each with the control that makes it mean something.</p>
+</div></div>
+<div class="wrap">
+<div class="panel" id="ev-structure">
+
+      <div class="ev">
+        <div class="k">E1</div>
+        <div>
+          <h4>The five-digit groups are packaging, not structure</h4>
+          <p>Five is odd, so the alternating high/low pattern flips phase at every group boundary: group 1 reads
+          H&nbsp;L&nbsp;H&nbsp;L&nbsp;H, group 2 reads L&nbsp;H&nbsp;L&nbsp;H&nbsp;L. The pattern belongs to the
+          continuous stream, not to the groups. The book groups every cryptogram in fives for transmission and
+          pads the last with nulls; that is all the fives are.</p>
+          <p>This kills the reading that first suggests itself &mdash; that 79 five-digit groups are a dictionary
+          code, of exactly the kind the book demonstrates nine pages earlier with the groups
+          <span class="num">55381 42872 35284</span>.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">E2</div>
+        <div>
+          <h4>The unit is a two-digit coordinate pair</h4>
+          <p>392 digits, strictly alternating <span class="num">{6,7,8,9}</span> then
+          <span class="num">{1,2,3,4,5}</span>, one exception. That is a bipartite square: rows against
+          columns, each symbol written row-then-column. Same device as Polybius' torch code on page 16 and the
+          A&ndash;E square on page 118, with digits in place of torches and letters.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">E3</div>
+        <div>
+          <h4>The stray zero is not a misprint &mdash; it is row five</h4>
+          <p>Read the row digit as <em>the row number plus five</em>. Rows 1&ndash;5 then print as
+          <span class="num">6 7 8 9 10</span>, and 10 written as a single figure is
+          <span class="num">0</span>. That one convention explains everything at once: why row digits start at
+          six rather than one, why the stream can be parsed without separators, and why a zero appears
+          exactly once. It is the fifth row of the square, used once in the whole message.</p>
+          <p>The row and column totals back this up. Rows carry
+          <span class="num">40.8 &middot; 28.6 &middot; 20.9 &middot; 9.2 &middot; 0.5</span> per cent of the text;
+          columns carry <span class="num">23.5 &middot; 23.0 &middot; 21.9 &middot; 16.8 &middot; 14.8</span>.
+          Rows spread wide, columns nearly flat. That asymmetry is the fingerprint of a keyword square filled
+          along its rows: MANCHESTER gives rows of 35.6&thinsp;/&thinsp;26.2&thinsp;/&thinsp;16.3&thinsp;/&thinsp;16.2&thinsp;/&thinsp;5.5
+          against columns of 26.6&thinsp;/&thinsp;24.4&thinsp;/&thinsp;19.9&thinsp;/&thinsp;17.8&thinsp;/&thinsp;11.2, and every other
+          keyword tested behaves the same way. The last row of such a square holds the tail of the alphabet
+          &mdash; the letters you would expect to see once, or never.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">E4</div>
+        <div>
+          <h4>The two digits of each printed pair belong together</h4>
+          <p>If a wide transposition had shuffled individual digits, the halves of each printed pair would come
+          from unrelated letters and the two coordinates would be statistically independent. They are not:
+          independence &chi;<sup>2</sup> = <span class="num">77.4</span> on 16 degrees of freedom. In 200,000
+          simulated random re-pairings of the very same digits the largest value reached was
+          <span class="num">53.2</span>, and the fewest distinct cells was <span class="num">19</span> where the
+          printed text uses <span class="num">18</span>. Both statistics fall outside 200,000 draws.</p>
+          <p>This rules out wide fractionation. It does <em>not</em> rule out a narrow one &mdash; at width 3 or
+          5 the two digits of an output pair come from letters only one or two apart, which are correlated in
+          real language. Section 4 closes that door separately, by exhaustion.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="panel" style="margin-top:16px" id="ev-language">
+
+      <div class="ev">
+        <div class="k">E5</div>
+        <div>
+          <h4>The order of the units carries no English structure at all</h4>
+          <p>Hill-climbing over every assignment of the 18 units to letters, scored on English n-gram
+          statistics: the best fit reaches <span class="num">&minus;3.85</span>. A genuine monoalphabetic
+          cipher of the same length, through the identical solver, comes out at
+          <span class="num">&minus;3.36</span> and reads cleanly. The same cipher randomly shuffled scores
+          <span class="num">&minus;3.87</span>.</p>
+          <p>The cipher is indistinguishable from its own shuffle. Whatever it is, it is not a plain
+          substitution of English. You can reproduce this in the Workbench in about ten seconds.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">E6</div>
+        <div>
+          <h4>The unit frequencies are odd, but not impossible</h4>
+          <p>Only <span class="num">18</span> distinct symbols where 196 letters of English typically use 22,
+          and the top thirteen carry <span class="num">95.9%</span> against English's 86%. Measured against
+          21,061 real contiguous 196-letter windows of English prose rather than idealised letter frequencies,
+          that combination occurs with probability <span class="num">0.0022</span> &mdash; roughly one message
+          in 450.</p>
+          <p>Unusual. Not disqualifying. An earlier version of this page put it at one in twenty thousand by
+          drawing letters independently from a frequency table; real text repeats itself and so uses fewer
+          distinct letters than that model expects. The correction matters, because it leaves a transposition
+          of an ordinary English substitution fully in play &mdash; and transposition preserves frequencies.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="panel" style="margin-top:16px" id="ev-order">
+
+      <div class="ev">
+        <div class="k">E7</div>
+        <div>
+          <h4>The units have been reordered &mdash; and this one is decisive</h4>
+          <p>How often a sequence repeats itself cannot be changed by <em>any</em> one-to-one substitution.
+          Letters, syllables, a nomenclator of names and phrases, an invented alphabet &mdash; relabel the
+          symbols however you like and the count of recurring pairs, triples and quadruples stays exactly the
+          same. Only reordering moves it. So the repeat profile tests every substitution hypothesis at once.</p>
+          <p>The cipher shows <span class="num">48</span> recurring pairs, <span class="num">5</span> recurring
+          triples, and <span class="num">no</span> recurring quadruple. Real English of this length averages
+          43.3, <span class="num">19.8</span> and <span class="num">10.2</span>. Against 21,061 real windows,
+          P(triples this few) = <span class="num">0.0036</span> and P(no quadruple at all) =
+          <span class="num">0.017</span>.</p>
+          <p>Now take the same 196 units and shuffle them 20,000 times. The shuffles average 49.1 pairs, 6.0
+          triples, 0.4 quadruples, 0.0 five-grams. The cipher: 48, 5, 0, 0. It is not merely consistent with a
+          random reordering of itself &mdash; it sits dead centre of it.</p>
+          <p>One loophole is worth closing explicitly, because it is the only substitution that <em>can</em>
+          suppress repeats: a <b>homophonic</b> square, where common letters get several cells each. Spreading
+          E across three cells does break up the repetition &mdash; but only by spreading the text over more
+          symbols. Simulated on real English: a 36-cell homophonic grid brings recurring triples down to 5.9,
+          matching the cipher, and in doing so uses <span class="num">33</span> distinct symbols with only
+          <span class="num">59.5%</span> in its top thirteen. The cipher manages 5 recurring triples while
+          using <span class="num">18</span> symbols with <span class="num">95.9%</span> in its top thirteen.
+          No grid size reaches both corners at once.</p>
+          <p><b>Conclusion.</b> A transposition happened, and no substitution can be the whole story &mdash;
+          not a plain alphabet, not a syllable table however well it fitted the frequency profile, not a
+          nomenclator, not homophones. Suppressing repetition while <em>shrinking</em> the alphabet is
+          something only reordering does.</p>
+        </div>
+      </div>
+
+      <div class="ev">
+        <div class="k">E8</div>
+        <div>
+          <h4>And the reordering is total &mdash; every unit moved on its own</h4>
+          <p>E7 says the order was destroyed. E8 says how thoroughly, and it turns out to be the single most
+          useful number on this page for ruling out accidents.</p>
+          <p>A reordering that moves whole <em>blocks</em> &mdash; two printed lines swapped by a typesetter,
+          two five-digit groups exchanged, a chunk of the message pasted in the wrong place &mdash; leaves every
+          n-gram inside a block completely intact. Take real English, cut it into blocks of L units, shuffle the
+          blocks, and count what survives:</p>
+          <div class="scroll"><table style="width:100%;max-width:520px">
+            <tr><th >Block size</th><th>Recurring triples</th><th >Which accident that is</th></tr>
+            <tr><td class="mono">196</td><td class="mono">19.2</td><td >nothing moved</td></tr>
+            <tr><td class="mono">49</td><td class="mono">19.7</td><td >quarters swapped</td></tr>
+            <tr><td class="mono">25</td><td class="mono">18.5</td><td >the eight printed lines reordered</td></tr>
+            <tr><td class="mono">14</td><td class="mono">17.4</td><td >&nbsp;</td></tr>
+            <tr><td class="mono">5</td><td class="mono">13.1</td><td >five-digit groups reordered</td></tr>
+            <tr><td class="mono">3</td><td class="mono">9.4</td><td >&nbsp;</td></tr>
+            <tr><td class="mono">2</td><td class="mono">7.1</td><td >&nbsp;</td></tr>
+            <tr><td class="mono">1</td><td class="mono">5.3</td><td >every unit moved independently</td></tr>
+            <tr><td class="mono"><b>the cipher</b></td><td class="mono"><b>5</b></td><td >&nbsp;</td></tr>
+          </table></div>
+          <p style="margin-top:12px">Only block size 1 gets there. Which means the disorder in this message is
+          not an accident of printing or of handling. Swapped lines, swapped groups, a dropped unit shifting
+          everything along &mdash; all of those leave most of the original order standing, and the measurement
+          would see it. Whatever reordered these 196 units took them one at a time.</p>
+          <p>That is exactly what a columnar transposition does, and exactly what no typesetter's slip does.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<div class="pagenav"><a href="02-measurements.html"><span class="lbl">&larr; 02</span>Measurements</a><a href="04-attacks.html" style="text-align:right"><span class="lbl">04 &rarr;</span>What has been tried</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

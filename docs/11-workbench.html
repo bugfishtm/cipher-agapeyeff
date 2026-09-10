@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workbench &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="11-workbench.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[11] Workbench</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+<ul class="navsub">
+<li><a href="#t1">1 text</a></li>
+<li><a href="#t2">2 square</a></li>
+<li><a href="#t3">3 solver</a></li>
+<li><a href="#t4">4 transposition</a></li>
+<li><a href="#t5">5 joint</a></li>
+</ul>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[11]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>Workbench</h1>
+  <p class="lede">Five tools over one shared working text. The two solvers run for as long as you let them.</p>
+</div></div>
+<div class="wrap">
+<!-- --- T1 : working text --- -->
+    <div class="panel" id="t1">
+      <h3>Tool 1 &middot; The working text</h3>
+      <p class="hint" style="margin-bottom:14px">The printed text is 395 digits. Everything downstream runs on
+      what you set here.</p>
+
+      <div class="row" style="margin-bottom:12px">
+        <span class="chip">Padding</span>
+        <div class="seg" id="padseg" role="group" aria-label="Trailing padding">
+          <button data-pad="3" class="on">Drop trailing 000 &rarr; 392</button>
+          <button data-pad="0">Keep all 395</button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom:12px">
+        <span class="chip">Digit 195</span>
+        <div class="seg" id="fixseg" role="group" aria-label="Repair of digit 195">
+          <button data-fix="0" class="on">0 as printed</button>
+          <button data-fix="6">6</button>
+          <button data-fix="7">7</button>
+          <button data-fix="8">8</button>
+          <button data-fix="9">9</button>
+          <button data-fix="del">Delete it</button>
+        </div>
+      </div>
+
+      <label class="f" style="margin-bottom:6px">Working digits &mdash; edit freely</label>
+      <textarea id="worktext" spellcheck="false" rows="6" style="width:100%;font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:3px;padding:12px"></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="applytext" type="button">Apply</button>
+        <button class="btn ghost" id="resettext" type="button">Reset to printed</button>
+        <span class="hint" id="workstatus"></span>
+      </div>
+    </div>
+
+    <!-- --- T2 : square decoder --- -->
+    <div class="panel" style="margin-top:16px" id="t2">
+      <h3>Tool 2 &middot; The square</h3>
+      <p class="hint" style="margin-bottom:14px">Fill the grid and the plaintext below updates on every
+      keystroke. Row and column labels are editable too &mdash; d'Agapeyeff warns on page 142 that neither the
+      letters nor the coordinates are likely to be in any obvious order.</p>
+
+      <div class="grid2" style="gap:22px">
+        <div>
+          <div class="scroll"><table class="sq" id="sqtable"></table></div>
+          <div class="row" style="margin-top:14px">
+            <label class="f" style="flex:1;min-width:180px">Keyword fill
+              <input type="text" id="kw" value="MANCHESTER" spellcheck="false">
+            </label>
+            <label class="f">Alphabet
+              <select id="alphamode">
+                <option value="ij">25 letters, I = J (Playfair, p.123)</option>
+                <option value="nj">25 letters, J omitted (p.118)</option>
+                <option value="q">25 letters, Q omitted (Polybius, p.16)</option>
+                <option value="full">26 letters, 5 x 5 + row 0</option>
+              </select>
+            </label>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn" id="fillkw" type="button">Fill from keyword</button>
+            <button class="btn ghost" id="fillplain" type="button">Plain A&ndash;Z</button>
+            <button class="btn ghost" id="transposesq" type="button">Transpose grid</button>
+            <button class="btn ghost" id="swapcoord" type="button">Swap coordinate order</button>
+          </div>
+          <p class="hint" style="margin-top:10px" id="coordnote"></p>
+        </div>
+
+        <div>
+          <div class="readout" style="margin-bottom:12px">
+            <div class="cell"><span class="k">English score</span><span class="v" id="sqscore">&mdash;</span></div>
+            <div class="cell"><span class="k">Reads like</span><span class="v sm" id="sqverdict">&mdash;</span></div>
+          </div>
+          <div class="gauge"><i id="sqgauge" style="width:0%"></i></div>
+          <div class="scaleline"><span>&minus;6.0 noise</span><span>&minus;3.85 best fit</span><span>&minus;3.36 English</span></div>
+          <label class="f" style="margin-top:14px">Plaintext</label>
+          <div class="data" id="sqout" style="min-height:150px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --- T3 : solver --- -->
+    <div class="panel" style="margin-top:16px" id="t3">
+      <h3>Tool 3 &middot; Substitution solver</h3>
+      <p class="hint" style="margin-bottom:14px">Hill-climbing over every assignment of the distinct units to
+      letters, scored on English trigram statistics from a 148,000-letter corpus. Try the known-good control
+      target and watch <span class="num">THEGENERALORDEREDTHESECOND&hellip;</span> come out; then run it on the
+      cipher and watch it fail to beat the cipher's own shuffle. That failure is evidence E5, reproducible
+      here in seconds. This is a lighter model than the four-gram one behind Section 4, so it has its own
+      scale: real English about <span class="num">&minus;3.36</span>, the best fit on this cipher
+      <span class="num">&minus;3.85</span>, noise below <span class="num">&minus;5</span>.</p>
+
+      <div class="settings">
+        <label class="f">Target
+          <select id="solvetarget">
+            <option value="cipher">The cipher</option>
+            <option value="shuffle">The cipher, shuffled</option>
+            <option value="control">Known-good control</option>
+          </select>
+        </label>
+        <label class="f">Stop after
+          <select id="solvestop">
+            <option value="0">Never &mdash; run until I stop it</option>
+            <option value="30">30 seconds</option>
+            <option value="120" selected>2 minutes</option>
+            <option value="600">10 minutes</option>
+            <option value="3600">1 hour</option>
+          </select>
+        </label>
+        <label class="f">Restart when stuck after
+          <select id="solvepatience">
+            <option value="1">every local optimum</option>
+            <option value="3" selected>3 without improvement</option>
+            <option value="10">10 without improvement</option>
+          </select>
+        </label>
+        <label class="f">Effort per restart
+          <select id="solveeffort">
+            <option value="1">Light &mdash; swaps only</option>
+            <option value="2" selected>Normal &mdash; swaps and new letters</option>
+            <option value="3">Heavy &mdash; plus random kicks</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row" style="margin-bottom:14px">
+        <button class="btn" id="solvebtn" type="button">Run solver</button>
+        <button class="btn ghost" id="stopbtn" type="button" disabled>Stop</button>
+        <span class="rate" id="solverate"></span>
+      </div>
+
+      <div class="readout" style="margin-bottom:12px">
+        <div class="cell"><span class="k">Best score</span><span class="v" id="solvescore">&mdash;</span><span class="ref" id="solvebestat"></span></div>
+        <div class="cell"><span class="k">Restarts</span><span class="v" id="solveiter">0</span><span class="ref" id="solveelapsed">0s</span></div>
+        <div class="cell"><span class="k">Verdict</span><span class="v sm" id="solveverdict">idle</span></div>
+      </div>
+      <div class="gauge"><i id="solvegauge" style="width:0%"></i></div>
+      <div class="scaleline"><span>&minus;6.0 noise</span><span>&minus;3.85 best fit on this cipher</span><span>&minus;3.36 real English</span></div>
+      <label class="f" style="margin-top:14px">Best plaintext so far</label>
+      <div class="data" id="solveout" style="min-height:120px">Press Run solver.</div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn ghost" id="pushsq" type="button">Send this key to the square</button>
+      </div>
+    </div>
+
+    <!-- --- T4 : transposition --- -->
+    <div class="panel" style="margin-top:16px" id="t4">
+      <h3>Tool 4 &middot; Transposition lab</h3>
+      <p class="hint" style="margin-bottom:14px">Undo a transposition before the square gets to see the text.
+      Keys may be a word &mdash; numbered by alphabetical rank exactly as on page 117, a convention checked
+      against the author's own worked example &mdash; or a list of numbers. Choose whether the pieces being
+      moved are whole two-digit units or single digits; the parity check tells you at once whether a
+      digit-level key could ever have produced the printed pattern.</p>
+
+      <div class="row" style="margin-bottom:12px">
+        <label class="f" style="flex:1;min-width:200px">Key
+          <input type="text" id="tkey" value="MANCHESTR" spellcheck="false">
+        </label>
+        <label class="f">Pieces
+          <select id="tunit">
+            <option value="unit">Whole units (two digits)</option>
+            <option value="digit">Single digits</option>
+          </select>
+        </label>
+        <label class="f">Direction
+          <select id="tdir">
+            <option value="undo">Undo (read columns &rarr; rows)</option>
+            <option value="apply">Apply (rows &rarr; read columns)</option>
+          </select>
+        </label>
+      </div>
+      <div class="row" style="margin-bottom:12px">
+        <button class="btn" id="trun" type="button">Transform</button>
+        <button class="btn ghost" id="tpush" type="button">Make this the working text</button>
+        <span class="hint" id="torder"></span>
+      </div>
+
+      <hr class="thin">
+      <p class="hint" style="margin-bottom:10px">Or take an unkeyed route instead. All 614 of these were swept
+      offline against a four-gram model and none of them reads; they are here so you can look at any one
+      yourself. "Chinese manner" is the book's own geometry from page 126 &mdash; message written up and down
+      the columns beginning on the right, read off by rows.</p>
+      <div class="row" style="margin-bottom:12px">
+        <label class="f">Route
+          <select id="troute">
+            <option value="columnar">Plain columnar, no key</option>
+            <option value="boustro">Boustrophedon columns</option>
+            <option value="chinese">Chinese manner (p.126)</option>
+            <option value="rtl">Columns right to left</option>
+            <option value="rail">Rail fence</option>
+            <option value="spiral">Spiral, from the top left</option>
+            <option value="diag">Diagonals</option>
+            <option value="none">No route</option>
+          </select>
+        </label>
+        <label class="f">Width or rails
+          <input type="text" id="trw" value="14" spellcheck="false" style="width:70px">
+        </label>
+        <label class="c"><input type="checkbox" id="trrev"> read it backwards</label>
+        <button class="btn" id="trroute" type="button">Apply route</button>
+      </div>
+
+      <div class="readout" style="margin-bottom:12px">
+        <div class="cell"><span class="k">Alternation</span><span class="v sm" id="tparity">&mdash;</span></div>
+        <div class="cell"><span class="k">Distinct units</span><span class="v" id="tdistinct">&mdash;</span></div>
+        <div class="cell"><span class="k">Fit to English</span><span class="v" id="tchi">&mdash;</span></div>
+      </div>
+      <label class="f">Result</label>
+      <div class="data" id="tout" style="min-height:100px"></div>
+      <p class="hint" style="margin-top:10px">A digit-level key that reports <b>broken</b> cannot be the one
+      d'Agapeyeff used, because his output would not have alternated. Unit-level keys always report intact
+      &mdash; which is exactly why they remain the live hypothesis.</p>
+    </div>
+
+    <!-- --- T5 : joint search --- -->
+    <div class="panel" style="margin-top:16px" id="t5">
+      <h3>Tool 5 &middot; Joint search &mdash; square and transposition together</h3>
+      <p class="hint" style="margin-bottom:14px">The real attack, in miniature. It seeds the substitution from
+      unit frequencies (which a transposition cannot hide), builds the column order greedily from bigram
+      statistics and improves it by 2-opt, refines the substitution against the trigram model, and repeats
+      until neither improves &mdash; then perturbs and goes again. The offline version in
+      <code class="mono">solver/</code> solves the column order <em>exactly</em> by dynamic programming and is
+      far stronger; this one is for exploring a specific width by hand.</p>
+
+      <div class="settings">
+        <label class="f">Width
+          <select id="jwidth">
+            <option value="0" selected>Sweep 2 &ndash; 15</option>
+            <option value="7">7</option><option value="8">8</option>
+            <option value="9">9</option><option value="10">10</option>
+            <option value="11">11</option><option value="12">12</option>
+            <option value="13">13</option><option value="14">14</option>
+            <option value="15">15</option>
+          </select>
+        </label>
+        <label class="f">Long columns
+          <select id="jpattern">
+            <option value="std" selected>Leftmost (the convention)</option>
+            <option value="any">Anywhere (hand-slip mode)</option>
+          </select>
+        </label>
+        <label class="f">Stop after
+          <select id="jstop">
+            <option value="0">Never &mdash; run until I stop it</option>
+            <option value="60">1 minute</option>
+            <option value="300" selected>5 minutes</option>
+            <option value="1800">30 minutes</option>
+            <option value="7200">2 hours</option>
+          </select>
+        </label>
+        <label class="f">Target
+          <select id="jtarget">
+            <option value="cipher" selected>The cipher</option>
+            <option value="control">Known-good control</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row" style="margin-bottom:14px">
+        <button class="btn" id="jrun" type="button">Run joint search</button>
+        <button class="btn ghost" id="jstopbtn" type="button" disabled>Stop</button>
+        <span class="rate" id="jrate"></span>
+      </div>
+
+      <div class="readout" style="margin-bottom:12px">
+        <div class="cell"><span class="k">Best score</span><span class="v" id="jscore">&mdash;</span><span class="ref" id="jat"></span></div>
+        <div class="cell"><span class="k">Attempts</span><span class="v" id="jtries">0</span><span class="ref" id="jelapsed">0s</span></div>
+        <div class="cell"><span class="k">Verdict</span><span class="v sm" id="jverdict">idle</span></div>
+      </div>
+      <div class="gauge"><i id="jgauge" style="width:0%"></i></div>
+      <div class="scaleline"><span>&minus;6.0 noise</span><span>&minus;3.70 this cipher's plateau</span><span>&minus;3.36 real English</span></div>
+      <label class="f" style="margin-top:14px">Best plaintext so far</label>
+      <div class="data" id="jout" style="min-height:120px">Press Run joint search. On the control target it finds English inside a minute &mdash; 196 letters of it, at about &minus;3.23. On the cipher it climbs to roughly &minus;3.70 and stops, which is what taking the best of several thousand wrong keys is worth.</div>
+    </div>
+
+  </div>
+<div class="pagenav"><a href="10-book.html"><span class="lbl">&larr; 10</span>The book&#x27;s toolkit</a><span></span></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/workbench.js"></script>
+</body></html>

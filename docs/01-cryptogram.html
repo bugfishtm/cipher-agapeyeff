@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The cryptogram &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="01-cryptogram.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[01] The cryptogram</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+<ul class="navsub">
+<li><a href="#views">five readings</a></li>
+<li><a href="#anomalies">the anomalies</a></li>
+</ul>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[01]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>The cryptogram</h1>
+  <p class="lede">Transcribed from the 1974 facsimile and checked digit by digit against the page image, then against Schmeh's published text.</p>
+</div></div>
+<div class="wrap">
+<div class="panel stack" id="views">
+      <div class="row">
+        <div class="seg" id="viewseg" role="group" aria-label="Representation">
+          <button data-view="printed" class="on">As printed</button>
+          <button data-view="stream">Digit stream</button>
+          <button data-view="units">196 units</button>
+          <button data-view="square">14 &times; 14</button>
+          <button data-view="parity">Parity map</button>
+        </div>
+        <span style="flex:1"></span>
+        <button class="btn ghost" id="copybtn" type="button">Copy current view</button>
+      </div>
+
+      <div id="viewout" class="data"></div>
+      <p class="hint" id="viewnote"></p>
+    </div>
+
+    <div class="grid2" style="margin-top:16px" id="anomalies">
+      <div class="panel">
+        <h3>The zero at digit 195</h3>
+        <p>Every digit in an odd position is
+        <span class="num">6 7 8 9</span> and every digit in an even position is <span class="num">1 2 3 4 5</span>
+        &mdash; across all 392 working digits, with exactly one exception. Digit&nbsp;195, the last digit of
+        group&nbsp;39 (<span class="num">63630</span>), is a <span class="num">0</span> sitting where a row
+        digit belongs.</p>
+        <p>The page was re-rendered at 1400&nbsp;dpi to
+        settle it: the glyph is an old-style zero, an x-height oval, unmistakably not a 6 or an 8. It is real,
+        and E3 below argues it is not an error either &mdash; read the row digit as the row number plus five and
+        the labels run 6 7 8 9 10, with 10 set as a single figure. The zero is row five of the square.</p>
+        <p>And it does not sit just anywhere. It
+        is unit <b>98 of 196</b> &mdash; the exact midpoint of the message, and the last cell of row 7 in the
+        14&nbsp;&times;&nbsp;14 grid. That may be coincidence in a message with only one anomaly to place, but
+        it is the sort of coincidence that deserves testing rather than admiring, and it is item 3 in
+        Section 8.</p>
+        <p class="hint">The Workbench lets you overrule the whole reading and substitute 6, 7, 8 or 9 instead.
+        Every replacement has been run through the full machine attack; none changes the outcome.</p>
+      </div>
+      <div class="panel">
+        <h3>The odd digit count</h3>
+        <p>395 digits will not divide into pairs.
+        Drop the trailing <span class="num">000</span> of the final group as transmission padding &mdash; the
+        convention d'Agapeyeff uses throughout the book, "nulls to complete the five letters" &mdash; and
+        392 remain.</p>
+        <p>392 digits = <b>196 units</b>, and
+        196 = 14&nbsp;&times;&nbsp;14. A perfect square, which is exactly the shape the book tells you to look
+        for when attacking a transposition: "we count the number of letters in the crypt; there are 36, which
+        is 6&nbsp;&times;&nbsp;6, and we therefore construct a square accordingly."</p>
+        <p class="hint">Tempting, and probably deliberate. Section 4 reports what happened when every
+        transposition that shape allows was actually tried.</p>
+      </div>
+    </div>
+  </div>
+<div class="pagenav"><a href="index.html"><span class="lbl">&larr; 00</span>The investigation</a><a href="02-measurements.html" style="text-align:right"><span class="lbl">02 &rarr;</span>Measurements</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>

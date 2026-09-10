@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measurements &middot; D'Agapeyeff</title>
+<link rel="icon" href="./favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="02-measurements.html">
+<div class="mbar">
+  <button class="navtoggle" id="navtoggle" type="button" aria-expanded="false">&#9776; menu</button>
+  <span class="cur">[02] Measurements</span>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+<aside class="side" id="side" aria-label="Contents">
+  <button class="navtoggle navclose" id="navclose" type="button">&times; close</button>
+  <div class="brand"><a href="index.html">
+    <div class="t">D&#39;AGAPEYEFF</div><div class="s">cipher &middot; 1939 &middot; open case</div></a></div>
+  <ol class="navlist">
+<li><a href="index.html"><span class="n">00</span><span>The investigation</span></a>
+</li>
+<li><a href="01-cryptogram.html"><span class="n">01</span><span>The cryptogram</span></a>
+</li>
+<li><a href="02-measurements.html"><span class="n">02</span><span>Measurements</span></a>
+<ul class="navsub">
+<li><a href="#freqpanels">frequencies</a></li>
+<li><a href="#repeatpanel">repetition</a></li>
+</ul>
+</li>
+<li><a href="03-evidence.html"><span class="n">03</span><span>Evidence</span></a>
+</li>
+<li><a href="04-attacks.html"><span class="n">04</span><span>What has been tried</span></a>
+</li>
+<li><a href="05-what-went-wrong.html"><span class="n">05</span><span>What went wrong</span></a>
+</li>
+<li><a href="06-verdict.html"><span class="n">06</span><span>What cipher is it</span></a>
+</li>
+<li><a href="07-record.html"><span class="n">07</span><span>The published record</span></a>
+</li>
+<li><a href="08-next.html"><span class="n">08</span><span>What to do next</span></a>
+</li>
+<li><a href="09-assessment.html"><span class="n">09</span><span>How it could be cracked</span></a>
+</li>
+<li><a href="10-book.html"><span class="n">10</span><span>The book&#x27;s toolkit</span></a>
+</li>
+<li><a href="11-workbench.html"><span class="n">11</span><span>Workbench</span></a>
+</li>
+</ol>
+  <div class="sidefoot" id="sidestat"></div>
+  <div class="sidelegal"><a href="https://bugfishtm.github.io/privacy.html">Privacy</a><a href="https://bugfishtm.github.io/impressum.html">Impressum</a></div>
+</aside>
+<main class="main">
+<div class="phead"><div class="wrap">
+  <div class="crumb"><span class="sec">[02]</span> &middot; D&#39;AGAPEYEFF INVESTIGATION</div>
+  <h1>Measurements</h1>
+  <p class="lede">Everything on this page is computed live in your browser from the working text.</p>
+</div></div>
+<div class="wrap">
+<div class="readout" id="readout"></div>
+
+    <div class="grid2" style="margin-top:16px" id="freqpanels">
+      <div class="panel">
+        <h3>Digit frequency</h3>
+        <div class="bars" id="digitbars"></div>
+        <hr class="thin">
+        <h3>Row digits vs column digits</h3>
+        <div class="grid2" style="gap:20px">
+          <div><div class="bars" id="rowbars"></div></div>
+          <div><div class="bars" id="colbars"></div></div>
+        </div>
+        <p class="hint" style="margin-top:12px">Rows spread wide, columns nearly flat &mdash; the fingerprint of
+        a keyword square filled along its rows. See E3.</p>
+      </div>
+
+      <div class="panel">
+        <h3>The square as actually used</h3>
+        <div class="scroll"><table class="heat" id="heat"></table></div>
+        <p class="hint" style="margin-top:12px">Observed count above, count expected if the two digits were
+        independent below. Three cells of the top four rows are never used
+        (<span class="num">61</span>, <span class="num">73</span>, <span class="num">95</span>), and the fifth
+        row &mdash; label 0 &mdash; appears exactly once, which is what the tail of a keyword square should do.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px" id="repeatpanel">
+      <div class="panel">
+        <h3>Unit frequency, sorted &mdash; against English</h3>
+        <div class="bars" id="unitbars"></div>
+        <p class="hint" style="margin-top:12px">Grey bars behind: what the 26 English letters would look like in
+        a text of this length. Flatter at the top, and it falls off a cliff at position 14 &mdash; unusual,
+        though only about a one-in-450 departure from real English prose. See E6.</p>
+      </div>
+      <div class="panel">
+        <h3>Repetition</h3>
+        <div id="repeats"></div>
+        <p class="hint" style="margin-top:12px">In 196 letters of English, THE alone normally appears six or
+        seven times. Here no sequence of three units occurs more than twice and no sequence of four recurs at
+        all. This panel is the whole case for a transposition &mdash; see E7, the one measurement no
+        substitution can touch.</p>
+      </div>
+    </div>
+  </div>
+<div class="pagenav"><a href="01-cryptogram.html"><span class="lbl">&larr; 01</span>The cryptogram</a><a href="03-evidence.html" style="text-align:right"><span class="lbl">03 &rarr;</span>Evidence</a></div>
+</div>
+</main>
+</div>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+
+</body></html>
