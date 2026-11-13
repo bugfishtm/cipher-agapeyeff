@@ -6,6 +6,12 @@ This repository hosts my investigation of the **D'Agapeyeff cipher** — the cha
 
 The repository also contains the native attack harness (`solver/`) that produced every negative result quoted on the site — 222 million transposition keys rejected, each attack first validated against a known control.
 
+## ⚠️ How This Documentation Came to Be
+
+The content in this repository is **my own work from the past** — notes, experiments, workbench tools and algorithms that had piled up unsorted over time. I used **AI to sort that material** and to write it up as a website that is easy to look through. So most of the wording is not mine — **the ideas behind it, the programmed workbench tools and the algorithms are**.
+
+Parts of this work deliberately follow a single possibility all the way to its end, including ones that may look like the wrong track — testing and ruling out such a path is part of the work itself. Because of that focus, and because the text was written by AI, it can sometimes sound blunt, dismiss other ideas or explanations, or come across as disrespectful. **None of that is meant personally.** If your idea or theory seems brushed aside here, please don't take offence — it is not a judgement of you or of your work.
+
 **Please note:** This is a private project. The source code is public only because it is part of my project infrastructure — GitHub Pages requires the repository content to be accessible. This is not an open-source project, not a template, and not intended for reuse.
 
 ## 📁 Repository Structure
